@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Guide | Nextieria</title>
+    <link rel="icon" href="https://nextieria.ddns.net:45/Downloads/Other/NextieriaN.ico?v=a3bd85f6" type="image/x-icon">
+    <link rel="stylesheet" href="../assets/css/guides.css">
+</head>
+<body>
+
+    <div id="sidebar">
+        <a href="https://nextieria.ddns.net" style="color:#58a6ff; font-family: 'LuckiestGuy', cursive;">← Home</a>
+        <div style="border-bottom:1px solid #30363d; margin:20px 0;"></div>
+        <nav>
+            <a href="https://nextieria.ddns.net/news" class="nav-link">News</a>
+            <a href="#info" class="nav-link">Requirements</a>
+            <a href="#s1" class="nav-link">Steps 1-4</a>
+            <a href="#s5" class="nav-link">Steps 5-8</a>
+            <a href="#s9" class="nav-link">Steps 9-12</a>
+            <a href="https://discord.gg/JvdM7D2B9Y" class="help-link">Need Help?</a>
+        </nav>
+    </div>
+
+    <div id="main-content">
+        <div id="info" class="step">
+            <h1>Requirements</h1>
+            <ul>
+                <li>An Android device</li>
+                <li>5 GB of free usable storage</li>
+                <li>Device used in tutorial: Samsung Galaxy S25 Ultra</li>
+            </ul>
+        </div>
+
+        <div id="s1" class="step">
+            <h2>Step 1</h2>
+            <p>Go to the downloads channel in Discord and tap "Here" under Android.</p>
+            <a href="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%201.jpg"><img src="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%201.jpg" alt="Step 1"></a>
+            
+            <h2>Step 2</h2>
+            <p>Select your Google account and tap "OK".</p>
+            <a href="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%202.jpg"><img src="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%202.jpg" alt="Step 2"></a>
+            
+            <h2>Step 3</h2>
+            <p>Tap "Install" to begin.</p>
+            <a href="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%203.jpg"><img src="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%203.jpg" alt="Step 3"></a>
+            
+            <h2>Step 4</h2>
+            <p>Wait for the game data (3.87 GB) to download.</p>
+            <a href="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%204.jpg"><img src="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%204.jpg" alt="Step 4" class="landscape"></a>
+        </div>
+
+        <div id="s5" class="step">
+            <h2>Step 5</h2>
+            <p>On the welcome screen, tap the green "LOGIN" button.</p>
+            <a href="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%205.jpg"><img src="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%205.jpg" alt="Step 5" class="landscape"></a>
+            
+            <h2>Step 6</h2>
+            <p>Select "Epic Games" as login method.</p>
+            <a href="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%206.jpg"><img src="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%206.jpg" alt="Step 6" class="landscape"></a>
+            
+            <h2>Step 7</h2>
+            <p>Leave this screen open and go back to the Discord downloads channel.</p>
+            <a href="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%207.jpg"><img src="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%207.jpg" alt="Step 7" class="landscape"></a>
+            
+            <h2>Step 8</h2>
+            <p>Tap the link to "Get your mobile login info".</p>
+            <a href="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%208.jpg"><img src="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%208.jpg" alt="Step 8"></a>
+        </div>
+
+        <div id="s9" class="step">
+            <h2>Step 9</h2>
+            <p>Copy the email and password shown on the screen.</p>
+            <a href="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%209.jpg"><img src="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%209.jpg" alt="Step 9" class="landscape"></a>
+            
+            <h2>Step 10</h2>
+            <p>Return to the login screen, paste your info, and tap "LOG IN".</p>
+            <a href="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%2010.jpg"><img src="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%2010.jpg" alt="Step 10" class="landscape"></a>
+            
+            <h2>Step 11</h2>
+            <p>Read the EULA and tap "ACCEPT".</p>
+            <a href="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%2011.jpg"><img src="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%2011.jpg" alt="Step 11" class="landscape"></a>
+            
+            <h2>Step 12</h2>
+            <p>You are now ready to play!</p>
+            <a href="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%2012.jpg"><img src="https://nextieria.ddns.net:45/Downloads/Images/Tutorial/Android/Step%2012.jpg" alt="Step 12" class="landscape"></a>
+        </div>
+    </div>
+
+
+    <script>
+        const links = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.step');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                if (window.scrollY >= section.offsetTop - 120) current = section.id;
+            });
+            links.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+</html>

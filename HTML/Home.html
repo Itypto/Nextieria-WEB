@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nextieria</title>
+    <link rel="icon" type="image/x-icon" href="https://nextieria.ddns.net:45/Downloads/Other/NextieriaN.ico?v=a3bd85f6">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <script src="/js/home.js" defer></script>
+    <style>
+        @font-face {
+            font-family: 'NewFN';
+            src: url('https://nextieria.ddns.net:45/Downloads/Fonts/NewFn.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'LuckiestGuy';
+            src: url('https://nextieria.ddns.net:45/Downloads/Fonts/LuckiestGuy.ttf') format('truetype');
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'NewFN', sans-serif;
+            background-color: #101014;
+            color: #fff;
+        }
+
+
+        #news-container {
+            width: 100%;
+            margin: 0;
+            height: calc(100vh - 120px);
+            min-height: 560px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0;
+            background: #000;
+            isolation: isolate;
+        }
+
+        #news-container::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.42) 34%, rgba(0, 0, 0, 0.08) 72%), linear-gradient(0deg, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0) 38%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .news-slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: clamp(32px, 6vw, 90px);
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(1.035);
+            transition: opacity 0.6s ease, visibility 0.6s ease, transform 2.8s ease;
+        }
+
+        .news-slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+
+        .news-content {
+            position: relative;
+            z-index: 2;
+            width: min(480px, 92%);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .news-content h2 {
+            font-family: 'NewFN';
+            font-size: clamp(2.5rem, 5vw, 5.5rem);
+            line-height: 0.92;
+            margin: 0;
+            text-shadow: 0 4px 18px rgba(0, 0, 0, 0.75);
+            text-transform: uppercase;
+        }
+
+        .news-content p {
+            font-size: clamp(1rem, 1.35vw, 1.3rem);
+            line-height: 1.38;
+            margin: 0;
+            text-shadow: 0 3px 12px rgba(0, 0, 0, 0.7);
+        }
+
+        .news-btn {
+            font-family: 'LuckiestGuy';
+            background: #fff;
+            color: #000;
+            padding: 13px 24px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            font-size: 1.05rem;
+            min-height: 48px;
+            border-radius: 6px;
+            letter-spacing: 0.4px;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .news-btn:hover {
+            transform: translateY(-2px);
+            background: #ffe100;
+        }
+
+        .hero-controls {
+            position: absolute;
+            inset: 0;
+            z-index: 4;
+            pointer-events: none;
+        }
+
+        .slide-dots {
+            position: absolute;
+            left: 50%;
+            bottom: clamp(20px, 3vw, 42px);
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 44px;
+            pointer-events: auto;
+        }
+
+        .slide-dot {
+            width: 44px;
+            height: 4px;
+            border: 0;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.38);
+            padding: 0;
+            overflow: hidden;
+            cursor: pointer;
+            transition: width 0.2s ease, background 0.2s ease, transform 0.2s ease;
+        }
+
+        .slide-dot:hover {
+            background: rgba(255, 255, 255, 0.72);
+            transform: scaleY(1.35);
+        }
+
+        .slide-dot.active {
+            width: 72px;
+            background: rgba(255, 255, 255, 0.34);
+        }
+
+        .slide-dot span {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            background: #fff;
+            transform: scaleX(0);
+            transform-origin: left center;
+        }
+
+        .slide-dot.active span {
+            animation: slideTimer var(--slide-duration, 6500ms) linear forwards;
+        }
+
+        .arrow-controls {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 clamp(16px, 2.8vw, 44px);
+            pointer-events: none;
+        }
+
+        .nav-btn {
+            width: 48px;
+            height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.92);
+            border: none;
+            color: #101014;
+            border-radius: 6px;
+            padding: 0;
+            transition: transform 0.18s ease, background 0.18s ease, opacity 0.18s ease;
+        }
+
+        .nav-btn {
+            pointer-events: auto;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            background: #fff;
+        }
+
+        .nav-btn:active {
+            transform: translateY(0) scale(0.96);
+        }
+
+        .nav-btn svg {
+            width: 32px;
+            height: 32px;
+            fill: currentColor;
+        }
+
+        .scroll-more {
+            position: absolute;
+            left: 50%;
+            bottom: clamp(72px, 7vw, 100px);
+            z-index: 5;
+            transform: translateX(-50%);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 36px;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            color: #fff;
+            font-family: 'NewFN', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            opacity: 1;
+            visibility: visible;
+            text-shadow: 0 3px 12px rgba(0, 0, 0, 0.85);
+            animation: scrollJump 1.4s ease-in-out infinite;
+            transition: opacity 0.25s ease, visibility 0.25s ease, color 0.2s ease;
+        }
+
+        .scroll-more:hover {
+            color: #ffe100;
+        }
+
+        .scroll-more.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .scroll-more svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+            transform: rotate(90deg);
+            filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.75));
+        }
+
+        .go-top {
+            position: fixed;
+            left: 50%;
+            bottom: 34px;
+            z-index: 20;
+            transform: translateX(-50%);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 36px;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            color: #fff;
+            font-family: 'NewFN', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            text-shadow: 0 3px 12px rgba(0, 0, 0, 0.85);
+            animation: topJump 1.4s ease-in-out infinite;
+            transition: opacity 0.25s ease, visibility 0.25s ease, color 0.2s ease;
+        }
+
+        .go-top:hover {
+            color: #ffe100;
+        }
+
+        .go-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .go-top svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+            transform: rotate(-90deg);
+            filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.75));
+        }
+
+        .nextieria-links {
+            min-height: 100vh;
+            background: #17171d;
+            padding: clamp(76px, 8vw, 118px) clamp(24px, 5vw, 80px) 56px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nextieria-links-inner {
+            width: 100%;
+            max-width: 1740px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 28px;
+        }
+
+        .footer-logo {
+            width: min(280px, 70vw);
+            height: auto;
+            display: block;
+        }
+
+        .footer-line {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.14);
+            margin: 52px 0 46px;
+        }
+
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(180px, 1fr));
+            gap: clamp(40px, 8vw, 150px);
+        }
+
+        .footer-column h2 {
+            font-family: 'NewFN';
+            font-size: clamp(1.6rem, 2.1vw, 2.15rem);
+            margin: 0 0 24px;
+            line-height: 1;
+            color: #fff;
+        }
+
+        .footer-column a {
+            display: block;
+            width: fit-content;
+            color: rgba(255, 255, 255, 0.76);
+            text-decoration: none;
+            font-size: clamp(1.05rem, 1.18vw, 1.25rem);
+            line-height: 1.35;
+            margin: 0 0 16px;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .footer-column a:hover {
+            color: #fff;
+            transform: translateX(4px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.14);
+            margin-top: 46px;
+            padding-top: 30px;
+            color: rgba(255, 255, 255, 0.46);
+            font-size: 0.9rem;
+            line-height: 1.55;
+        }
+
+        @keyframes slideTimer {
+            from {
+                transform: scaleX(0);
+            }
+
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        @keyframes scrollJump {
+
+            0%,
+            100% {
+                transform: translate(-50%, 0);
+            }
+
+            50% {
+                transform: translate(-50%, 10px);
+            }
+        }
+
+        @keyframes topJump {
+
+            0%,
+            100% {
+                transform: translate(-50%, 0);
+            }
+
+            50% {
+                transform: translate(-50%, -10px);
+            }
+        }
+
+        .content-section {
+            width: min(86%, 1200px);
+            margin: 60px auto;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .content-section img {
+            width: 50%;
+            border-radius: 10px;
+        }
+
+        .content-section h2 {
+            font-family: 'NewFN';
+            font-size: 2.5rem;
+            margin-top: 0;
+        }
+
+        #players-section {
+            width: min(86%, 1200px);
+            margin: 54px auto 0;
+            text-align: center;
+        }
+
+        #player-count {
+            font-family: 'NewFN', sans-serif;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.82);
+            margin: 0;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: min(360px, 86%);
+            min-height: 68px;
+            margin: 50px auto 20px auto;
+            padding: 15px 36px;
+            border: 0;
+            background: #f5ff00;
+            color: #000;
+            text-align: center;
+            font-family: 'LuckiestGuy';
+            font-size: clamp(1.55rem, 2.4vw, 2.35rem);
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 0;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            background: #fbff22;
+        }
+
+        .download-btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #777;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 800px) {
+            #news-container {
+                width: 100%;
+                margin-top: 0;
+                height: calc(100vh - var(--site-nav-height));
+                min-height: 620px;
+            }
+
+            .news-slide {
+                justify-content: flex-end;
+                padding: 28px 18px 96px;
+                background-position: center top;
+            }
+
+            .news-content {
+                width: 100%;
+            }
+
+            .slide-dots {
+                bottom: 18px;
+            }
+
+            .arrow-controls {
+                padding: 0 12px;
+            }
+
+            .nav-btn {
+                width: 42px;
+                height: 42px;
+            }
+
+            .scroll-more {
+                bottom: 76px;
+                font-size: 0.9rem;
+            }
+
+            .go-top {
+                bottom: 24px;
+                font-size: 0.9rem;
+            }
+
+            .slide-dot {
+                width: 30px;
+            }
+
+            .slide-dot.active {
+                width: 54px;
+            }
+
+            .nextieria-links {
+                padding: 56px 22px 42px;
+                align-items: flex-start;
+            }
+
+            .footer-top {
+                align-items: flex-start;
+            }
+
+            .footer-line {
+                margin: 34px 0 32px;
+            }
+
+            .footer-columns {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+
+            .footer-column h2 {
+                margin-bottom: 16px;
+            }
+
+            .footer-column a {
+                margin-bottom: 12px;
+            }
+
+            .content-section {
+                width: 88%;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .content-section img {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="site-nav" aria-label="Main navigation">
+        <img src="https://nextieria.ddns.net:45/Downloads/Images/NextieriaN.png" alt="Nextieria" class="logo-nav"
+            onclick="playAudio()">
+        <a href="https://nextieria.ddns.net" class="active">Home</a>
+        <a href="https://nextieria.ddns.net/shop">Shop</a>
+        <a href="https://nextieria.ddns.net/tutorials/">Tutorials</a>
+        <a href="https://nextieria.ddns.net/news">News</a>
+        <input type="checkbox" id="nav-more-toggle" class="more-toggle" hidden>
+
+        <label for="nav-more-toggle" class="nav-more" aria-label="More options">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </label>
+        <div class="more-menu" role="menu" aria-hidden="false">
+            <a href="https://nextieria.ddns.net/Info" role="menuitem">Info</a>
+            <a href="https://nextieria.ddns.net/eula" role="menuitem">Eula</a>
+            <a href="https://nextieria.ddns.net/events" role="menuitem">Events</a>
+            <a href="https://nextieria.ddns.net/creator" role="menuitem">Creator requirements</a>
+    </nav>
+    <div id="news-container">
+        <div class="hero-controls">
+            <div class="slide-dots" id="slide-dots"></div>
+            <div class="arrow-controls">
+                <button class="nav-btn" type="button" aria-label="Previous" onclick="prevSlide()">
+                    <svg viewBox="0 0 32 32" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M16.942 6.329a1.2 1.2 0 0 1 1.697 0l2.546 2.546a1.2 1.2 0 0 1 0 1.697l-5.43 5.43 5.43 5.43a1.2 1.2 0 0 1 0 1.697l-2.546 2.545a1.2 1.2 0 0 1-1.697 0L7.27 16.002z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+                <button class="nav-btn" type="button" aria-label="Next" onclick="nextSlide()">
+                    <svg viewBox="0 0 32 32" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M15.058 6.329a1.2 1.2 0 0 0-1.697 0l-2.546 2.545a1.2 1.2 0 0 0 0 1.697l5.43 5.43-5.43 5.43a1.2 1.2 0 0 0 0 1.698l2.546 2.545a1.2 1.2 0 0 0 1.697 0l9.672-9.672z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="scroll-more" id="scroll-more" role="link" tabindex="0" onclick="scrollPastHero()"
+            onkeydown="handleScrollMoreKey(event)">
+            <span>Scroll down for more</span>
+            <svg viewBox="0 0 32 32" aria-hidden="true">
+                <path fill-rule="evenodd"
+                    d="M15.058 6.329a1.2 1.2 0 0 0-1.697 0l-2.546 2.545a1.2 1.2 0 0 0 0 1.697l5.43 5.43-5.43 5.43a1.2 1.2 0 0 0 0 1.698l2.546 2.545a1.2 1.2 0 0 0 1.697 0l9.672-9.672z"
+                    clip-rule="evenodd"></path>
+            </svg>
+        </div>
+    </div>
+    <div id="extra-content"></div>
+    <div id="players-section">
+        <p id="player-count">Players online: loading...</p>
+    </div>
+    <a href="https://nextieria.ddns.net/Download" class="download-btn">DOWNLOAD NOW</a>
+    <section class="nextieria-links" id="nextieria-links">
+        <div class="nextieria-links-inner">
+            <div class="footer-top">
+                <img class="footer-logo" src="https://nextieria.ddns.net:45/Downloads/Images/NextieriaFullName.png"
+                    alt="Nextieria">
+            </div>
+            <div class="footer-line"></div>
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h2>Main</h2>
+                    <a href="https://nextieria.ddns.net">Home</a>
+                    <a href="https://nextieria.ddns.net/Download">Get Nextieria</a>
+                    <a href="https://nextieria.ddns.net/news">News</a>
+                </div>
+                <div class="footer-column">
+                    <h2>More</h2>
+                    <a href="https://nextieria.ddns.net/Info">FAQ/Info</a>
+                    <a href="https://nextieria.ddns.net/eula">Eula</a>
+                    <a href="https://nextieria.ddns.net/events">Events</a>
+                    <a href="https://nextieria.ddns.net/creator">Creator requirements</a>
+                </div>
+                <div class="footer-column">
+                    <h2>Support</h2>
+                    <a href="https://discord.gg/JvdM7D2B9Y">Get help</a>
+                    <a href="https://nextieria.ddns.net/issue">Common issues</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                Nextieria is not affiliated with, endorsed by, or sponsored by Epic Games, Inc. <br>
+                All Fortnite assets are property of Epic Games.
+            </div>
+        </div>
+    </section>
+    <div class="go-top" id="go-top" role="link" tabindex="0" onclick="goToTop()" onkeydown="handleGoTopKey(event)">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+            <path fill-rule="evenodd"
+                d="M15.058 6.329a1.2 1.2 0 0 0-1.697 0l-2.546 2.545a1.2 1.2 0 0 0 0 1.697l5.43 5.43-5.43 5.43a1.2 1.2 0 0 0 0 1.698l2.546 2.545a1.2 1.2 0 0 0 1.697 0l9.672-9.672z"
+                clip-rule="evenodd"></path>
+        </svg>
+        <span>Go to the top</span>
+    </div>
+</body>
+
+</html>

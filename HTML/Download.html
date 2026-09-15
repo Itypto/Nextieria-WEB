@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="https://nextieria.ddns.net:45/Downloads/Other/NextieriaN.ico?v=a3bd85f6">
+<title>Nextieria | Downloads</title>
+<style>
+@font-face { font-family: 'NewFN'; src: url('https://nextieria.ddns.net:45/Downloads/Fonts/NewFn.ttf') format('truetype'); }
+@font-face { font-family: 'LuckiestGuy'; src: url('https://nextieria.ddns.net:45/Downloads/Fonts/LuckiestGuy.ttf') format('truetype'); }
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; min-height: 100%; }
+
+body { font-family: 'NewFN', sans-serif; color: #fff; background: #180028; overflow: hidden; }
+
+.easter-egg { display: none; }
+.download-hero { position: relative; min-height: 100vh; overflow: hidden; display: flex; align-items: center; padding: clamp(40px, 5vw, 92px); background: radial-gradient(circle at 72% 42%, rgba(255,45,183,0.28), transparent 29%), linear-gradient(114deg, rgba(28,0,61,0.95) 0%, rgba(62,0,118,0.95) 47%, rgba(93,0,150,0.98) 100%); }
+.download-hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(130deg, transparent 0 25%, rgba(255,255,255,0.08) 25.2% 37%, transparent 37.2% 100%), linear-gradient(72deg, transparent 0 64%, rgba(255,255,255,0.06) 64.2% 74%, transparent 74.2% 100%); opacity: 0.62; animation: bgEnter 1s ease both; }
+.download-hero::after { content: ""; position: absolute; left: -12vw; bottom: -9vh; width: 52vw; height: 43vh; background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.02)); clip-path: polygon(0 0, 74% 20%, 100% 100%, 0 82%); opacity: 0.45; animation: shardEnter 0.9s ease both; }
+.hero-content { position: relative; z-index: 2; width: min(760px, 100%); animation: textEnter 0.8s cubic-bezier(.2,.8,.2,1) both; }
+.season-label { margin: 0 0 8px; font-family: 'LuckiestGuy', sans-serif; font-size: clamp(2.1rem, 3.8vw, 4.4rem); line-height: 0.95; text-transform: uppercase; text-shadow: 4px 4px 0 rgba(0,0,0,0.36); }
+.download-button { display: inline-flex; align-items: center; justify-content: center; margin-top: 28px; min-width: min(360px, 100%); min-height: 68px; padding: 15px 36px; border: 0; background: #f5ff00; color: #000; font-family: 'LuckiestGuy', sans-serif; font-size: clamp(1.55rem, 2.4vw, 2.35rem); text-transform: uppercase; cursor: pointer; transition: transform 0.2s ease, background 0.2s ease; animation: buttonEnter 0.75s ease both 0.45s; }
+.download-button:hover { transform: translateY(-3px) scale(1.02); background: #fbff22; }
+.download-button:active { transform: translateY(0) scale(0.98); }
+.download-button:disabled { cursor: wait; opacity: 0.75; transform: none; background: #c9ce1a; }
+.hero-skin { position: absolute; z-index: 1; right: clamp(-80px, 4vw, 82px); bottom: -4vh; width: min(48vw, 770px); max-height: 92vh; object-fit: contain; object-position: bottom right; filter: drop-shadow(0 28px 28px rgba(0,0,0,0.34)); animation: skinEnter 0.95s cubic-bezier(.2,.8,.2,1) both 0.15s; }
+
+.platform-modal { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(0,139,190,0.82); opacity: 0; visibility: hidden; transition: opacity 0.22s ease, visibility 0.22s ease; }
+.platform-modal.open { opacity: 1; visibility: visible; }
+.platform-panel { position: relative; width: min(780px, 100%); padding: 58px 32px 44px; text-align: center; }
+.modal-close { position: absolute; top: 0; right: 0; width: 46px; height: 46px; border: 0; background: #19d3e7; color: #102634; font-size: 2.2rem; line-height: 1; font-family: Arial, sans-serif; font-weight: 900; cursor: pointer; }
+.platform-panel h2 { margin: 0 0 30px; font-family: 'LuckiestGuy', sans-serif; font-size: clamp(2.3rem, 5vw, 4rem); line-height: 0.98; text-transform: uppercase; text-shadow: 4px 4px 0 rgba(0,0,0,0.2); }
+.platform-panel p { max-width: 580px; margin: 0 auto 28px; font-size: clamp(1.1rem, 2vw, 1.35rem); line-height: 1.35; text-shadow: 3px 3px 0 rgba(0,0,0,0.18); }
+.platform-panel p a { color: #f5ff00; text-decoration: none; }
+.platform-panel p a:hover { color: #fff; }
+.platform-grid { display: grid; grid-template-columns: repeat(2, minmax(130px, 1fr)); gap: 20px; max-width: 360px; margin: 0 auto; }
+.platform-card { min-height: 120px; padding: 15px 12px 13px; border: 0; background: #f5ff00; color: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; font-family: 'LuckiestGuy', sans-serif; font-size: 1rem; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: transform 0.18s ease, filter 0.18s ease; }
+.platform-card:hover { transform: translateY(-4px) scale(1.03); filter: brightness(1.08); }
+.platform-card svg { width: 48px; height: 48px; fill: currentColor; }
+.platform-card img { width: 52px; height: 52px; object-fit: contain; }
+.modal-step { display: none; }
+.modal-step.active { display: block; animation: textEnter 0.28s ease both; }
+
+@keyframes bgEnter {
+    from { opacity: 0; transform: scale(1.08); }
+    to { opacity: 0.62; transform: scale(1); }
+}
+
+@keyframes shardEnter {
+    from { opacity: 0; transform: translate(-80px, 80px) rotate(-5deg); }
+    to { opacity: 0.45; transform: translate(0, 0) rotate(0); }
+}
+
+@keyframes textEnter {
+    from { opacity: 0; transform: translateX(-70px) scale(0.98); }
+    to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes dateEnter {
+    from { opacity: 0; transform: translateY(-28px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes buttonEnter {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes skinEnter {
+    from { opacity: 0; transform: translateX(120px) scale(0.94); }
+    to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@media (max-width: 900px) {
+    .download-hero { min-height: 100vh; padding: 44px 22px 82px; align-items: flex-start; }
+    .hero-content { padding-top: 34px; }
+    .season-label { font-size: clamp(3.2rem, 17vw, 7rem); }
+    .download-button { min-width: 100%; }
+    .hero-skin {max-width: 100%; width: 500px; object-position: center; opacity: 0.42; }
+    .platform-grid { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+    .platform-panel { padding: 58px 0 32px; }
+}
+
+@media (max-width: 280px) {
+    .download-hero { min-height: 100vh; padding: 44px 22px 82px; align-items: flex-start; }
+    .hero-content { padding-top: 34px; }
+    .season-label { font-size: clamp(3.2rem, 17vw, 7rem); }
+    .download-button { min-width: 100%; }
+    .hero-skin { max-width: 100%; width: 500px; object-position: center; opacity: 0.42; }
+    .platform-grid { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+    .platform-panel { padding: 58px 0 32px; }
+    .easter-egg { display: block !important; }
+}
+</style>
+</head>
+<body>
+<main class="download-hero">
+    <section class="hero-content">
+        <h1 class="season-label">Nextieria<br>Season 6</h1>
+        <button class="download-button" type="button" onclick="openPlatforms()">Download Nextieria</button>
+        <h2 class="easter-egg">Yo this screen is really thin!</h2>
+    </section>
+    <img class="hero-skin" src="https://nextieria.ddns.net:45/Downloads/Images/Website/DJYonder.png" alt="DjYonder">
+</main>
+<div class="platform-modal" id="platform-modal" aria-hidden="true">
+    <div class="platform-panel">
+        <button class="modal-close" type="button" aria-label="Close" onclick="closePlatforms()">&times;</button>
+        <div class="modal-step active" id="info-step">
+            <h2>Important info</h2>
+            <p>Epic Games owns Fortnite, its assets, and its properties. Nextieria is a community driven Fortnite-made project and is not affiliated with, endorsed by, or sponsored by Epic Games. If you want to play real Fortnite or visit the official Fortnite website, press <a href="https://www.fortnite.com/">here</a>.</p>
+            <button class="download-button" id="understand-button" type="button" onclick="showPlatformStep()" disabled>I understand (5)</button>
+        </div>
+        <div class="modal-step" id="platform-step">
+            <h2>Choose your<br>platform.</h2>
+            <div class="platform-grid">
+                <a class="platform-card" href="https://soon.com">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5L10.5 4.4V11H3V5.5ZM11.8 4.2L21 3V11H11.8V4.2ZM3 12.3H10.5V19L3 18V12.3ZM11.8 12.3H21V21L11.8 19.8V12.3Z"></path></svg>
+                    <span>PC</span>
+                </a>
+                <button class="platform-card" type="button" onclick="showMobileStep()">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2.5h8c1.2 0 2.2 1 2.2 2.2v14.6c0 1.2-1 2.2-2.2 2.2H8c-1.2 0-2.2-1-2.2-2.2V4.7c0-1.2 1-2.2 2.2-2.2Zm0 2v13.7h8V4.5H8Zm2.8 15.3h2.4v-.9h-2.4v.9Z"></path></svg>
+                    <span>Mobile</span>
+                </button>
+            </div>
+        </div>
+        <div class="modal-step" id="mobile-step">
+            <h2>Choose your platform</h2>
+            <div class="platform-grid">
+                <a class="platform-card" href="https://nextieria.ddns.net:45/Downloads/APKs/Nextiera-Fortnite.apk">
+                    <img src="https://nextieria.ddns.net:45/Downloads/Images/Android.png" alt="">
+                    <span>Android</span>
+                </a>
+                <a class="platform-card" href="https://nextieria.ddns.net:45/Downloads/iPAS/Nextieria.ipa">
+                    <img src="https://nextieria.ddns.net:45/Downloads/Images/apple.png" alt="">
+                    <span>iOS/iPadOS</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function openPlatforms() {
+    const modal = document.getElementById('platform-modal');
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    setModalStep('info-step');
+    startInfoWait();
+}
+
+function closePlatforms() {
+    const modal = document.getElementById('platform-modal');
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+}
+
+function setModalStep(stepId) {
+    document.querySelectorAll('.modal-step').forEach((step) => {
+        step.classList.toggle('active', step.id === stepId);
+    });
+}
+
+let infoWaitTimer = null;
+
+function startInfoWait() {
+    const button = document.getElementById('understand-button');
+    let seconds = 5;
+    clearInterval(infoWaitTimer);
+    button.disabled = true;
+    button.textContent = `I understand (${seconds})`;
+    infoWaitTimer = setInterval(() => {
+        seconds -= 1;
+        if (seconds <= 0) {
+            clearInterval(infoWaitTimer);
+            button.disabled = false;
+            button.textContent = 'I understand';
+            return;
+        }
+        button.textContent = `I understand (${seconds})`;
+    }, 1000);
+}
+
+function showPlatformStep() {
+    setModalStep('platform-step');
+}
+
+function showMobileStep() {
+    setModalStep('mobile-step');
+}
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+        closePlatforms();
+    }
+});
+
+document.getElementById('platform-modal').addEventListener('click', (event) => {
+    if (event.target.id === 'platform-modal') {
+        closePlatforms();
+    }
+});
+</script>
+</body>
+</html>

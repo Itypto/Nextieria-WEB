@@ -1,0 +1,229 @@
+:root {
+    --site-nav-height: 80px;
+}
+
+html {
+    scrollbar-gutter: stable;
+}
+
+.site-nav,
+.site-nav * {
+    box-sizing: border-box;
+}
+
+.site-nav {
+    position: relative;
+    z-index: 20;
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    width: 100%;
+    height: var(--site-nav-height);
+    min-height: var(--site-nav-height);
+    margin: 0;
+    padding: 0 150px;
+    background: #161616;
+    font-family: 'NewFN', sans-serif;
+}
+
+.site-nav > a:not(.brand) {
+    display: inline-flex;
+    flex: 0 0 116px;
+    align-items: center;
+    justify-content: center;
+    width: 116px;
+    height: 44px;
+    margin: 0;
+    padding: 0 8px;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    color: #aaa;
+    font: 400 1.4rem/1 'NewFN', sans-serif;
+    letter-spacing: normal;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color .2s, border-color .2s;
+}
+
+.site-nav > a:not(.brand):hover,
+.site-nav > a.active,
+.site-nav > a[aria-current="page"] {
+    color: #fff;
+}
+
+.site-nav > a.active,
+.site-nav > a[aria-current="page"] {
+    border-bottom-color: #fff;
+}
+
+.site-nav > .logo-nav,
+.site-nav > .brand {
+    position: absolute;
+    top: 5px;
+    left: 20px;
+    display: block;
+    width: 70px;
+    height: 70px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    object-fit: contain;
+    cursor: pointer;
+    line-height: 0;
+    transition: transform .2s;
+}
+
+.site-nav > .brand img {
+    display: block;
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+
+.site-nav > .logo-nav:hover,
+.site-nav > .brand:hover {
+    transform: scale(1.05);
+}
+
+.site-nav > a:focus-visible {
+    outline: 3px solid #f5ff00;
+    outline-offset: 4px;
+}
+
+.site-nav > .timer-container {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    width: auto;
+    margin: 0;
+    transform: translateY(-50%);
+    font: 400 18px/1 'NewFN', sans-serif;
+    white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+    :root { --site-nav-height: 138px; }
+
+    .site-nav {
+        gap: 6px;
+        padding: 82px 12px 12px;
+    }
+
+    .site-nav > a:not(.brand) {
+        flex: 0 1 116px;
+        min-width: 0;
+        padding: 0 4px;
+        font-size: clamp(.85rem, 4vw, 1.05rem);
+    }
+
+    .site-nav > .logo-nav,
+    .site-nav > .brand {
+        top: 7px;
+        left: calc(50% - 35px);
+    }
+
+    .site-nav > .timer-container {
+        top: 25px;
+        right: 12px;
+        max-width: calc(50% - 55px);
+        padding: 8px;
+        transform: none;
+        font-size: clamp(12px, 3.5vw, 16px);
+        line-height: 1.15;
+        text-align: center;
+        white-space: normal;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .site-nav > a,
+    .site-nav > .logo-nav {
+        transition: none;
+    }
+}
+
+.more-toggle {
+    display: none;
+}
+
+.nav-more {
+    position: absolute;
+    right: 70px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.nav-more:hover {
+    background-color: #262626;
+}
+
+.nav-more .bar {
+    width: 20px;
+    height: 2px;
+    background-color: #aaa;
+    border-radius: 2px;
+    transition: background-color 0.2s;
+}
+
+.nav-more:hover .bar {
+    background-color: #fff;
+}
+
+.more-menu {
+    display: none;
+    position: absolute;
+    top: var(--site-nav-height);
+    right: 70px;
+    flex-direction: column;
+    min-width: 200px;
+    background-color: #161616;
+    border: 1px solid #333;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 8px 0;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    z-index: 30;
+}
+
+.more-menu a {
+    display: block;
+    padding: 10px 18px;
+    color: #aaa;
+    text-decoration: none;
+    font: 400 1.1rem/1 'NewFN', sans-serif;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.more-menu a:hover {
+    background-color: #262626;
+    color: #fff;
+}
+
+.more-toggle:checked ~ .more-menu {
+    display: flex;
+}
+
+@media (max-width: 900px) {
+    .nav-more {
+        right: 10px;
+        top: 25px;
+        transform: none;
+    }
+
+    .more-menu {
+        right: 10px;
+        top: 75px;
+    }
+}

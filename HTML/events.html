@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://nextieria.ddns.net:45/Downloads/Other/NextieriaN.ico?v=a3bd85f6">
+    <title>Nextieria | Events</title>
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <style>
+        @font-face {
+            font-family: 'NewFN';
+            src: url('https://nextieria.ddns.net:45/Downloads/Fonts/NewFn.ttf') format('truetype');
+        }
+
+        body {
+            margin: 0;
+            background: #101014;
+            color: #f0e9e9de;
+            font-family: sans-serif;
+            line-height: 1.6;
+        }
+
+        main {
+            width: min(900px, 90%);
+            margin: 0 auto;
+            padding: 0px 0;
+        }
+        h1{
+            font-size: 6rem;
+            text-align: center;
+            justify-content: center;
+            margin-top: 30vh;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="site-nav" aria-label="Main navigation">
+        <img src="https://nextieria.ddns.net:45/Downloads/Images/NextieriaN.png" alt="Nextieria" class="logo-nav" onclick="playAudio()">
+        <a href="https://nextieria.ddns.net">Home</a>
+        <a href="https://nextieria.ddns.net/shop">Shop</a>
+        <a href="https://nextieria.ddns.net/tutorials/">Tutorials</a>
+        <a href="https://nextieria.ddns.net/news">News</a>
+
+                <input type="checkbox" id="nav-more-toggle" class="more-toggle" hidden> 
+<label for="nav-more-toggle" class="nav-more" aria-label="More options">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </label>
+        <div class="more-menu" role="menu" aria-hidden="false">
+            <a href="https://nextieria.ddns.net/Info" role="menuitem">Info</a>
+            <a href="https://nextieria.ddns.net/eula" role="menuitem">Eula</a>
+            <a href="https://nextieria.ddns.net/events" role="menuitem">Events</a> 
+              <a href="https://nextieria.ddns.net/creator" role="menuitem">Creator requirements</a> 
+    </nav>
+    <h1><strong>NO EVENTS  HERE!</strong></h1>
+    <script>
+        function playAudio() {
+            var audio = new Audio('https://www.myinstants.com/media/sounds/fortnite-knocked.mp3');
+            audio.play();
+        }
+    </script>
+</body>

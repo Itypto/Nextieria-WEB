@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="https://nextieria.ddns.net:45/Downloads/Other/NextieriaN.ico?v=a3bd85f6">
+<title>Nextieria | Tutorials</title>
+<link rel="stylesheet" href="../assets/css/navbar.css">
+<style>
+@font-face { font-family: 'NewFN'; src: url('https://nextieria.ddns.net:45/Downloads/Fonts/NewFn.ttf') format('truetype'); }
+@font-face { font-family: 'LuckiestGuy'; src: url('https://nextieria.ddns.net:45/Downloads/Fonts/LuckiestGuy.ttf') format('truetype'); }
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; min-height: 100%; }
+
+body { font-family: 'NewFN', sans-serif; color: #fff; background: #180028; overflow: auto; }
+
+
+.tutorial-hero { position: relative; min-height: calc(100vh - var(--site-nav-height)); overflow: hidden; display: flex; align-items: center; padding: clamp(40px, 5vw, 92px); background: radial-gradient(circle at 72% 42%, rgba(255,45,183,0.28), transparent 29%), linear-gradient(114deg, rgba(28,0,61,0.95) 0%, rgba(62,0,118,0.95) 47%, rgba(93,0,150,0.98) 100%); }
+.tutorial-hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(130deg, transparent 0 25%, rgba(255,255,255,0.08) 25.2% 37%, transparent 37.2% 100%), linear-gradient(72deg, transparent 0 64%, rgba(255,255,255,0.06) 64.2% 74%, transparent 74.2% 100%); opacity: 0.62; animation: bgEnter 1s ease both; }
+.tutorial-hero::after { content: ""; position: absolute; left: -12vw; bottom: -9vh; width: 52vw; height: 43vh; background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.02)); clip-path: polygon(0 0, 74% 20%, 100% 100%, 0 82%); opacity: 0.45; animation: shardEnter 0.9s ease both; }
+.hero-content { position: relative; z-index: 2; width: min(680px, 100%); animation: textEnter 0.8s cubic-bezier(.2,.8,.2,1) both; }
+.season-label { margin: 0 0 26px; font-family: 'LuckiestGuy', sans-serif; font-size: clamp(2.8rem, 5.4vw, 6.6rem); line-height: 0.95; text-transform: uppercase; text-shadow: 4px 4px 0 rgba(0,0,0,0.36); }
+.tutorial-grid { display: grid; grid-template-columns: repeat(3, minmax(126px, 1fr)); gap: 18px; width: min(620px, 100%); }
+.platform-card { min-height: 142px; padding: 16px 12px 14px; border: 0; background: #f5ff00; color: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; font-family: 'LuckiestGuy', sans-serif; font-size: 1rem; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: transform 0.18s ease, filter 0.18s ease; animation: buttonEnter 0.75s ease both 0.35s; }
+.platform-card:hover { transform: translateY(-4px) scale(1.03); filter: brightness(1.08); }
+.platform-card img { width: 58px; height: 58px; object-fit: contain; }
+.platform-card small { font-size: 0.82rem; line-height: 1.1; text-align: center; }
+.platform-card.disabled { background: #777; color: #252525; pointer-events: none; filter: grayscale(1); }
+.hero-skin { position: absolute; z-index: 1; right: clamp(-80px, 4vw, 82px); bottom: -4vh; width: min(50vw, 790px); max-height: 94vh; object-fit: contain; object-position: bottom right; filter: drop-shadow(0 28px 28px rgba(0,0,0,0.34)); animation: skinEnter 0.95s cubic-bezier(.2,.8,.2,1) both 0.15s; }
+
+@keyframes bgEnter {
+    from { opacity: 0; transform: scale(1.08); }
+    to { opacity: 0.62; transform: scale(1); }
+}
+
+@keyframes shardEnter {
+    from { opacity: 0; transform: translate(-80px, 80px) rotate(-5deg); }
+    to { opacity: 0.45; transform: translate(0, 0) rotate(0); }
+}
+
+@keyframes textEnter {
+    from { opacity: 0; transform: translateX(-70px) scale(0.98); }
+    to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes buttonEnter {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes skinEnter {
+    from { opacity: 0; transform: translateX(120px) scale(0.94); }
+    to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@media (max-width: 900px) {
+    .tutorial-hero { min-height: calc(100vh - var(--site-nav-height)); padding: 44px 22px 82px; align-items: flex-start; }
+    .hero-content { padding-top: 34px; }
+    .season-label { font-size: clamp(3.2rem, 17vw, 7rem); }
+    .tutorial-grid { grid-template-columns: 1fr; max-width: 320px; }
+    .hero-skin { display: none; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="Main navigation">
+    <img src="https://nextieria.ddns.net:45/Downloads/Images/NextieriaN.png" alt="Nextieria" class="logo-nav" onclick="playAudio()">
+    <a href="https://nextieria.ddns.net">Home</a>
+    <a href="https://nextieria.ddns.net/shop">Shop</a>
+    <a href="https://nextieria.ddns.net/tutorials/" class="active">Tutorials</a>
+    <a href="https://nextieria.ddns.net/news">News</a>
+
+            <input type="checkbox" id="nav-more-toggle" class="more-toggle" hidden> 
+    <label for="nav-more-toggle" class="nav-more" aria-label="More options">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </label>
+        <div class="more-menu" role="menu" aria-hidden="false">
+            <a href="https://nextieria.ddns.net/Info" role="menuitem">Info</a>
+            <a href="https://nextieria.ddns.net/eula" role="menuitem">Eula</a>
+            <a href="https://nextieria.ddns.net/events" role="menuitem">Events</a> 
+              <a href="https://nextieria.ddns.net/creator" role="menuitem">Creator requirements</a> 
+</nav>
+<main class="tutorial-hero">
+    <section class="hero-content">
+        <h1 class="season-label">Nextieria<br>Tutorials</h1>
+        <div class="tutorial-grid">
+            <a class="platform-card" href="https://youtu.be/aO-rFx5GhVA">
+                <img src="https://nextieria.ddns.net:45/Downloads/Images/Website/windows.png" alt="Windows">
+                <span>Windows</span>
+                <small>Video tutorial</small>
+            </a>
+            <a class="platform-card" href="https://nextieria.ddns.net/tutorials/iOS">
+                <img src="https://nextieria.ddns.net:45/Downloads/Images/Website/apple.png" alt="Apple">
+                <span>Apple</span>
+                <small>Text tutorial</small>
+            </a>
+            <a class="platform-card" href="https://nextieria.ddns.net/tutorials/android">
+                <img src="https://nextieria.ddns.net:45/Downloads/Images/Website/android.png" alt="Android">
+                <span>Android</span>
+                <small>Text tutorial</small>
+            </a>
+            <a class="platform-card" href="https://nextieria.ddns.net/tutorials/linux">
+                <img src="https://nextieria.ddns.net:45/Downloads/Images/Website/linux.png" alt="Linux">
+                <span>Linux</span>
+                <small>Soon...</small>
+            </a>
+        </div>
+    </section>
+    <img class="hero-skin" src="https://nextieria.ddns.net:45/Downloads/Images/Website/season6-giddyup.png" alt="Giddy Up">
+</main>
+<script>
+function playAudio() {
+    new Audio('https://www.myinstants.com/media/sounds/fortnite-knocked.mp3').play();
+}
+</script>
+</body>
+</html>

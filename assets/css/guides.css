@@ -1,0 +1,26 @@
+        @font-face {
+            font-family: 'LuckiestGuy';
+            src: url('https://nextieria.ddns.net:45/Downloads/Fonts/LuckiestGuy.ttf') format('truetype');
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; display: flex; background-color: #0d1117; color: #e6edf3; }
+        #sidebar { width: 220px; padding: 20px; border-right: 1px solid #30363d; height: 100vh; position: fixed; background-color: #010409; box-sizing: border-box; }
+        #main-content { padding: 30px; margin-left: 260px; max-width: 850px; }
+        h1, h2 { font-family: 'LuckiestGuy', cursive; color: #58a6ff; letter-spacing: 1px; }
+        .step { margin-bottom: 40px; border-bottom: 1px solid #30363d; padding-bottom: 20px; }
+        .step h2 { color: #ffffff; }
+        .step img { display: block; margin-top: 15px; border-radius: 8px; border: 2px solid #444; width: 100%; max-width: 300px; }
+        .step img.landscape { max-width: 700px; }
+        
+        a { color: #58a6ff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .nav-link { display: block; margin-bottom: 10px; color: #58a6ff; font-family: 'LuckiestGuy', cursive; }
+        .nav-link.active { color: #ffffff; }
+        .help-link { color: #58a6ff; display: block; margin-top: 20px; font-weight: bold; font-family: 'LuckiestGuy', cursive; }
+        
+        @media (max-width: 768px) {
+            body { display: block; }
+            #sidebar { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid #30363d; }
+            #main-content { margin-left: 0; padding: 15px; }
+            .step img { max-width: 100%; }
+        }

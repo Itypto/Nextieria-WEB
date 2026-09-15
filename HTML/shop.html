@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nextieria | Shop</title>
+    <link rel="icon" type="image/x-icon" href="https://nextieria.ddns.net:45/Downloads/Other/NextieriaN.ico?v=a3bd85f6">
+    <link rel="stylesheet" href="https://components.unrealengine.com/fonts/inter/index.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <style>
+        @font-face { font-family: 'NewFN'; src: url('https://nextieria.ddns.net:45/Downloads/Fonts/NewFn.ttf') format('truetype'); }
+        @font-face {
+            font-family: 'LuckiestGuy';
+            src: url('https://nextieria.ddns.net:45/Downloads/Fonts/LuckiestGuy.ttf') format('truetype');
+        }
+
+        :root {
+            --fn-bg: #101014;
+            --fn-card: rgba(20, 20, 25, 0.85);
+            --fn-yellow: rgb(247,255,25);
+            --fn-yellow-hover: rgb(255,255,120);
+            --fn-purple: #a855f7;
+            --fn-border: rgba(168, 85, 247, 0.2);
+            --font-inter: "Inter", sans-serif;
+            --font-inter-tight: "Inter Tight", sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('https://nextieria.ddns.net:45/Downloads/Images/OGshop.png');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            font-family: 'LuckiestGuy', cursive;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .shop-content {
+            display: flex;
+            padding: 20px 40px 40px 40px;
+            gap: 50px;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .featured-section {
+            flex: 1.4;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .daily-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-title {
+            font-size: 45px;
+            margin: 0 0 18px 0;
+            text-shadow: 3px 3px 6px black;
+            text-transform: uppercase;
+        }
+
+        .featured-grid {
+            display: flex;
+            gap: 20px;
+            align-items: stretch;
+            width: 100%;
+        }
+
+        .featured-grid .item-card {
+            flex: 1;
+            min-height: 560px;
+        }
+
+        .daily-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            width: 100%;
+        }
+
+        .daily-grid .item-card {
+            height: 270px;
+        }
+
+        .item-card {
+            background-color: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .rarity-Common { background-color: rgba(128, 128, 128, 0.5); border-color: rgba(160, 160, 160, 0.4); }
+        .rarity-Uncommon { background-color: rgba(46, 204, 113, 0.5); border-color: rgba(46, 204, 113, 0.4); }
+        .rarity-Rare { background-color: rgba(0, 136, 255, 0.5); border-color: rgba(0, 136, 255, 0.4); }
+        .rarity-Epic { background-color: rgba(179, 57, 255, 0.5); border-color: rgba(179, 57, 255, 0.4); }
+        .rarity-Legendary { background-color: rgba(255, 159, 67, 0.5); border-color: rgba(255, 159, 67, 0.4); }
+        .rarity-MARVEL-SERIES { background-color: rgba(200, 0, 0, 0.7); border-color: rgba(255, 0, 0, 0.5); }
+
+        .item-image {
+            width: 100%;
+            flex: 1;
+            object-fit: contain;
+            padding: 15px;
+            box-sizing: border-box;
+            min-height: 0;
+        }
+
+        .item-details {
+            width: 100%;
+            padding: 12px 8px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.4);
+            box-sizing: border-box;
+            min-height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .item-name {
+            font-size: 16px;
+            line-height: 1.2;
+            word-break: break-word;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            text-shadow: 1px 1px 3px black;
+        }
+
+        .price-container {
+            width: 100%;
+            background-color: #09224a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px 0;
+            font-size: 20px;
+            box-sizing: border-box;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .vbucks-icon { width: 22px; height: 22px; margin-left: 8px; }
+.timer-container {
+            position: absolute;
+            right: 20px;
+            font-size: 18px;
+            text-shadow: 2px 2px 4px black;
+            color: var(--fn-yellow);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px 14px;
+            border-radius: 4px;
+            border: 1px solid var(--fn-border);
+        }
+
+        @media (max-width: 1100px) {
+            .shop-content {
+                flex-direction: column;
+                padding: 20px;
+                gap: 30px;
+            }
+            .featured-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            }
+            .featured-grid .item-card {
+                min-height: 420px;
+            }
+            .daily-grid {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                gap: 15px;
+            }
+            .daily-grid .item-card {
+                height: 260px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="site-nav" aria-label="Main navigation">
+        <img src="https://nextieria.ddns.net:45/Downloads/Images/NextieriaN.png" alt="Nextieria" class="logo-nav" onclick="playAudio()">
+        <a href="https://nextieria.ddns.net">Home</a>
+        <a href="https://nextieria.ddns.net/shop" class="active">Shop</a>
+        <a href="https://nextieria.ddns.net/tutorials/">Tutorials</a>
+        <a href="https://nextieria.ddns.net/news">News</a>
+            <div id="shop-timer" class="timer-container">00:00:00</div>
+    </nav>
+<div class="shop-content">
+    <div class="featured-section">
+        <h2 class="section-title">Featured</h2>
+        <div id="featured-grid" class="featured-grid"></div>
+    </div>
+    <div class="daily-section">
+        <h2 class="section-title">Daily</h2>
+        <div id="daily-grid" class="daily-grid"></div>
+    </div>
+</div>
+
+<script>
+    let nextRotationTime = null;
+
+    function fetchShop() {
+        fetch('https://nextieria.ddns.net:81/shop/code')
+            .then(res => res.json())
+            .then(data => {
+                const fGrid = document.getElementById('featured-grid');
+                const dGrid = document.getElementById('daily-grid');
+                fGrid.innerHTML = '';
+                dGrid.innerHTML = '';
+
+                data.featured.forEach(item => fGrid.appendChild(createCard(item)));
+                data.daily.forEach(item => dGrid.appendChild(createCard(item)));
+
+                if (data.rotationInfo && data.rotationInfo.nextRotationTimestamp) {
+                    nextRotationTime = data.rotationInfo.nextRotationTimestamp * 1000;
+                } else if (data.rotationInfo && data.rotationInfo.nextRotationUTC) {
+                    nextRotationTime = new Date(data.rotationInfo.nextRotationUTC).getTime();
+                }
+                updateCountdown();
+            });
+    }
+
+    function createCard(item) {
+        const card = document.createElement('div');
+        const rarity = item.rarity.replace(' ', '-');
+        card.className = `item-card rarity-${rarity}`;
+        card.innerHTML = `
+            <img src="${item.image}" class="item-image">
+            <div class="item-details">
+                <div class="item-name">${item.name}</div>
+            </div>
+            <div class="price-container">
+                ${item.price}
+                <img src="https://nextieria.ddns.net:45/Downloads/Images/Vbuck.png" class="vbucks-icon">
+            </div>
+        `;
+        return card;
+    }
+
+    function updateCountdown() {
+        if (!nextRotationTime) return;
+        const now = Date.now();
+        const diff = nextRotationTime - now;
+        const timerEl = document.getElementById('shop-timer');
+        if (!timerEl) return;
+
+        if (diff <= 0) {
+            timerEl.textContent = "REFRESHING...";
+            return;
+        }
+
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        const pad = (num) => String(num).padStart(2, '0');
+        timerEl.textContent = `RESETS IN: ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    }
+
+    fetchShop();
+    setInterval(fetchShop, 5000);
+    setInterval(updateCountdown, 1000);
+</script>
+
+    <script>
+        function playAudio() {
+            new Audio('https://www.myinstants.com/media/sounds/fortnite-knocked.mp3').play();
+        }
+    </script>
+</body>
+</html>
