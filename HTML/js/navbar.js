@@ -1,5 +1,3 @@
-// js/navbar.js
-
 const navbarHTML = `
 <nav class="site-nav" aria-label="Main navigation">
     <a class="brand" href="https://nextieria.ddns.net/" aria-label="Nextieria home">
