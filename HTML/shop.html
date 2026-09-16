@@ -7,22 +7,15 @@
     <link rel="icon" type="image/x-icon" href="https://nextieria.ddns.net:45/Downloads/Other/NextieriaN.ico?v=a3bd85f6">
     <link rel="stylesheet" href="https://components.unrealengine.com/fonts/inter/index.css">
     <link rel="stylesheet" href="../assets/css/navbar.css">
+    <script src="./js/navbar.js" defer></script>
     <style>
-        @font-face { font-family: 'NewFN'; src: url('https://nextieria.ddns.net:45/Downloads/Fonts/NewFn.ttf') format('truetype'); }
         @font-face {
             font-family: 'LuckiestGuy';
             src: url('https://nextieria.ddns.net:45/Downloads/Fonts/LuckiestGuy.ttf') format('truetype');
         }
-
-        :root {
-            --fn-bg: #101014;
-            --fn-card: rgba(20, 20, 25, 0.85);
-            --fn-yellow: rgb(247,255,25);
-            --fn-yellow-hover: rgb(255,255,120);
-            --fn-purple: #a855f7;
-            --fn-border: rgba(168, 85, 247, 0.2);
-            --font-inter: "Inter", sans-serif;
-            --font-inter-tight: "Inter Tight", sans-serif;
+        @font-face { 
+            font-family: 'NewFN'; 
+            src: url('https://nextieria.ddns.net:45/Downloads/Fonts/NewFn.ttf') format('truetype'); 
         }
 
         body {
@@ -32,7 +25,7 @@
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
-            font-family: 'LuckiestGuy', cursive;
+            font-family: 'NewFN', cursive;
             color: white;
             display: flex;
             flex-direction: column;
@@ -40,7 +33,7 @@
             box-sizing: border-box;
         }
 
-        .shop-content {
+        .shop-container {
             display: flex;
             padding: 20px 40px 40px 40px;
             gap: 50px;
@@ -62,11 +55,51 @@
             flex-direction: column;
         }
 
+        .section-header {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(180deg, #51607a 0%, #3e4c63 100%);
+            padding: 6px 14px;
+            margin-bottom: 18px;
+            height: 48px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .section-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            background: linear-gradient(180deg, #6c7c9c 0%, #566785 100%);
+            clip-path: polygon(0 0, calc(100% - 35px) 0, 100% 100%, 0 100%);
+            z-index: 1;
+        }
+
+        .daily-section .section-header::before {
+            width: 220px;
+        }
+
         .section-title {
-            font-size: 45px;
-            margin: 0 0 18px 0;
-            text-shadow: 3px 3px 6px black;
+            position: relative;
+            z-index: 2;
+            font-size: 2.3rem;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #cfd6df;
+            margin: 0;
+            font-family: 'LuckiestGuy', cursive;
+        }
+
+        .section-timer {
+            position: relative;
+            z-index: 2;
+            font-size: 1.8rem;
+            color: #ffffff;
         }
 
         .featured-grid {
@@ -100,6 +133,7 @@
             position: relative;
             overflow: hidden;
             border-radius: 4px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .rarity-Common { background-color: rgba(128, 128, 128, 0.5); border-color: rgba(160, 160, 160, 0.4); }
@@ -116,6 +150,7 @@
             padding: 15px;
             box-sizing: border-box;
             min-height: 0;
+            transition: opacity 0.3s ease;
         }
 
         .item-details {
@@ -128,6 +163,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            font-family: 'NewFN', cursive;
         }
 
         .item-name {
@@ -139,6 +175,8 @@
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             text-shadow: 1px 1px 3px black;
+            transition: opacity 0.3s ease;
+            font-family: 'NewFN', cursive;
         }
 
         .price-container {
@@ -151,23 +189,40 @@
             font-size: 20px;
             box-sizing: border-box;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-family: 'NewFN', cursive;
         }
 
         .vbucks-icon { width: 22px; height: 22px; margin-left: 8px; }
-.timer-container {
+
+        .card-dots {
             position: absolute;
-            right: 20px;
-            font-size: 18px;
-            text-shadow: 2px 2px 4px black;
-            color: var(--fn-yellow);
-            background: rgba(0, 0, 0, 0.5);
-            padding: 8px 14px;
-            border-radius: 4px;
-            border: 1px solid var(--fn-border);
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 5;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 4px 8px;
+            border-radius: 10px;
+        }
+
+        .card-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card-dot.active {
+            background-color: #ffffff;
+            transform: scale(1.2);
         }
 
         @media (max-width: 1100px) {
-            .shop-content {
+            .shop-container {
                 flex-direction: column;
                 padding: 20px;
                 gap: 30px;
@@ -190,92 +245,191 @@
     </style>
 </head>
 <body>
-    <nav class="site-nav" aria-label="Main navigation">
-        <img src="https://nextieria.ddns.net:45/Downloads/Images/NextieriaN.png" alt="Nextieria" class="logo-nav" onclick="playAudio()">
-        <a href="https://nextieria.ddns.net">Home</a>
-        <a href="https://nextieria.ddns.net/shop" class="active">Shop</a>
-        <a href="https://nextieria.ddns.net/tutorials/">Tutorials</a>
-        <a href="https://nextieria.ddns.net/news">News</a>
-            <div id="shop-timer" class="timer-container">00:00:00</div>
-    </nav>
-<div class="shop-content">
-    <div class="featured-section">
-        <h2 class="section-title">Featured</h2>
-        <div id="featured-grid" class="featured-grid"></div>
-    </div>
-    <div class="daily-section">
-        <h2 class="section-title">Daily</h2>
-        <div id="daily-grid" class="daily-grid"></div>
-    </div>
-</div>
+    <div id="main-nav"></div>
 
-<script>
-    let nextRotationTime = null;
-
-    function fetchShop() {
-        fetch('https://nextieria.ddns.net:81/shop/code')
-            .then(res => res.json())
-            .then(data => {
-                const fGrid = document.getElementById('featured-grid');
-                const dGrid = document.getElementById('daily-grid');
-                fGrid.innerHTML = '';
-                dGrid.innerHTML = '';
-
-                data.featured.forEach(item => fGrid.appendChild(createCard(item)));
-                data.daily.forEach(item => dGrid.appendChild(createCard(item)));
-
-                if (data.rotationInfo && data.rotationInfo.nextRotationTimestamp) {
-                    nextRotationTime = data.rotationInfo.nextRotationTimestamp * 1000;
-                } else if (data.rotationInfo && data.rotationInfo.nextRotationUTC) {
-                    nextRotationTime = new Date(data.rotationInfo.nextRotationUTC).getTime();
-                }
-                updateCountdown();
-            });
-    }
-
-    function createCard(item) {
-        const card = document.createElement('div');
-        const rarity = item.rarity.replace(' ', '-');
-        card.className = `item-card rarity-${rarity}`;
-        card.innerHTML = `
-            <img src="${item.image}" class="item-image">
-            <div class="item-details">
-                <div class="item-name">${item.name}</div>
+    <div class="shop-container" id="shop-main-container">
+        <div class="featured-section">
+            <div class="section-header">
+                <span class="section-title">FEATURED</span>
+                <span id="weekly-timer" class="section-timer" translate="no"></span>
             </div>
-            <div class="price-container">
-                ${item.price}
-                <img src="https://nextieria.ddns.net:45/Downloads/Images/Vbuck.png" class="vbucks-icon">
+            <div id="featured-grid" class="featured-grid"></div>
+        </div>
+
+        <div class="daily-section">
+            <div class="section-header">
+                <span class="section-title">DAILY</span>
+                <span id="daily-timer" class="section-timer" translate="no"></span>
             </div>
-        `;
-        return card;
-    }
-
-    function updateCountdown() {
-        if (!nextRotationTime) return;
-        const now = Date.now();
-        const diff = nextRotationTime - now;
-        const timerEl = document.getElementById('shop-timer');
-        if (!timerEl) return;
-
-        if (diff <= 0) {
-            timerEl.textContent = "REFRESHING...";
-            return;
-        }
-
-        const hours = Math.floor(diff / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-        const pad = (num) => String(num).padStart(2, '0');
-        timerEl.textContent = `RESETS IN: ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-    }
-
-    fetchShop();
-    setInterval(fetchShop, 5000);
-    setInterval(updateCountdown, 1000);
-</script>
+            <div id="daily-grid" class="daily-grid"></div>
+        </div>
+    </div>
 
     <script>
+        let nextDailyTime = null;
+        let nextFeaturedTime = null;
+        let cardIntervals = [];
+
+        function fetchShop() {
+            fetch('https://nextieria.ddns.net:81/shop/code')
+                .then(res => res.json())
+                .then(data => {
+                    cardIntervals.forEach(clearInterval);
+                    cardIntervals = [];
+
+                    const fGrid = document.getElementById('featured-grid');
+                    const dGrid = document.getElementById('daily-grid');
+                    fGrid.innerHTML = '';
+                    dGrid.innerHTML = '';
+
+                    const featuredItems = data.featured || [];
+                    const dailyItems = data.daily || [];
+
+                    featuredItems.forEach(item => fGrid.appendChild(createCard(item)));
+                    dailyItems.forEach(item => dGrid.appendChild(createCard(item)));
+
+                    if (data.rotationInfo) {
+                        const info = data.rotationInfo;
+
+                        if (info.nextDailyRotationTimestamp) {
+                            nextDailyTime = info.nextDailyRotationTimestamp * 1000;
+                        } else if (info.nextDailyRotationUTC) {
+                            nextDailyTime = new Date(info.nextDailyRotationUTC).getTime();
+                        }
+
+                        if (info.nextFeaturedRotationTimestamp) {
+                            nextFeaturedTime = info.nextFeaturedRotationTimestamp * 1000;
+                        } else if (info.nextFeaturedRotationUTC) {
+                            nextFeaturedTime = new Date(info.nextFeaturedRotationUTC).getTime();
+                        }
+                    }
+
+                    updateCountdown();
+                })
+                .catch(err => console.error('Error fetching shop:', err));
+        }
+
+        function createCard(item) {
+            const card = document.createElement('div');
+            const subItems = (item.items && item.items.length > 0) ? item.items : [item];
+            
+            let dotsHtml = '';
+            if (subItems.length > 1) {
+                dotsHtml = `<div class="card-dots">` + 
+                    subItems.map((_, i) => `<span class="card-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></span>`).join('') + 
+                    `</div>`;
+            }
+
+            card.innerHTML = `
+                <img class="item-image">
+                ${dotsHtml}
+                <div class="item-details">
+                    <div class="item-name"></div>
+                </div>
+                <div class="price-container">
+                    <span class="price-value"></span>
+                    <img src="https://nextieria.ddns.net:45/Downloads/Images/Vbuck.png" class="vbucks-icon">
+                </div>
+            `;
+
+            const imgEl = card.querySelector('.item-image');
+            const nameEl = card.querySelector('.item-name');
+            const priceEl = card.querySelector('.price-value');
+            const dots = card.querySelectorAll('.card-dot');
+
+            let currentIndex = 0;
+            let timer = null;
+
+            function updateDisplay(index) {
+                const currentSub = subItems[index];
+                const rarity = currentSub.rarity ? currentSub.rarity.replace(' ', '-') : (item.rarity ? item.rarity.replace(' ', '-') : 'Common');
+                
+                card.className = `item-card rarity-${rarity}`;
+                imgEl.src = currentSub.image || item.image;
+                nameEl.textContent = currentSub.name || currentSub.title || item.name || item.title;
+                
+                const currentPrice = (currentSub.price !== undefined && currentSub.price !== null) ? currentSub.price : item.price;
+                priceEl.textContent = currentPrice;
+
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+            }
+
+            function transitionTo(index) {
+                if (currentIndex === index) return;
+                currentIndex = index;
+                imgEl.style.opacity = '0';
+                nameEl.style.opacity = '0';
+                
+                setTimeout(() => {
+                    updateDisplay(currentIndex);
+                    imgEl.style.opacity = '1';
+                    nameEl.style.opacity = '1';
+                }, 300);
+            }
+
+            function startTimer() {
+                if (subItems.length > 1) {
+                    timer = setInterval(() => {
+                        const nextIndex = (currentIndex + 1) % subItems.length;
+                        transitionTo(nextIndex);
+                    }, 5000);
+                    cardIntervals.push(timer);
+                }
+            }
+
+            function resetTimer() {
+                if (timer) {
+                    clearInterval(timer);
+                    startTimer();
+                }
+            }
+
+            updateDisplay(0);
+            startTimer();
+
+            dots.forEach(dot => {
+                dot.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const targetIndex = parseInt(dot.getAttribute('data-index'), 10);
+                    transitionTo(targetIndex);
+                    resetTimer();
+                });
+            });
+
+            return card;
+        }
+
+        function formatDiff(diff) {
+            if (diff <= 0) return "REFRESHING...";
+
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            const pad = (num) => String(num).padStart(2, '0');
+            return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+        }
+
+        function updateCountdown() {
+            const now = Date.now();
+
+            const dailyTimer = document.getElementById('daily-timer');
+            if (dailyTimer && nextDailyTime) {
+                dailyTimer.textContent = formatDiff(nextDailyTime - now);
+            }
+
+            const weeklyTimer = document.getElementById('weekly-timer');
+            if (weeklyTimer && nextFeaturedTime) {
+                weeklyTimer.textContent = formatDiff(nextFeaturedTime - now);
+            }
+        }
+
+        fetchShop();
+        setInterval(fetchShop, 30000);
+        setInterval(updateCountdown, 1000);
+
         function playAudio() {
             new Audio('https://www.myinstants.com/media/sounds/fortnite-knocked.mp3').play();
         }
