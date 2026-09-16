@@ -44,13 +44,14 @@ html {
     letter-spacing: normal;
     text-decoration: none;
     white-space: nowrap;
-    transition: color .2s, border-color .2s;
+    transition: color .2s, border-color .2s, transform 0.2s ease;
 }
 
 .site-nav > a:not(.brand):hover,
 .site-nav > a.active,
 .site-nav > a[aria-current="page"] {
     color: #fff;
+    transform: scale(1.05);
 }
 
 .site-nav > a.active,
@@ -203,12 +204,13 @@ html {
     color: #aaa;
     text-decoration: none;
     font: 400 1.1rem/1 'NewFN', sans-serif;
-    transition: background-color 0.2s, color 0.2s;
+    transition: background-color 0.2s, color 0.2s, transform 0.2s ease;
 }
 
 .more-menu a:hover {
     background-color: #262626;
     color: #fff;
+    transform: translateX(5px);
 }
 
 .more-toggle:checked ~ .more-menu {
