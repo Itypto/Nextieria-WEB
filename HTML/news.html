@@ -7,19 +7,22 @@
     <title>Nextieria | News</title>
     <link rel="icon" type="image/x-icon" href="https://nextieria.ddns.net:45/Downloads/Other/NextieriaN.ico?v=a3bd85f6">
     <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
     <script src="./js/navbar.js" defer></script>
+    <script src="./js/footer.js" defer></script>
+    
     <style>
         @font-face { font-family: 'NewFN'; src: url('https://nextieria.ddns.net:45/Downloads/Fonts/NewFn.ttf') format('truetype'); font-display: swap; }
         @font-face { font-family: 'LuckiestGuy'; src: url('https://nextieria.ddns.net:45/Downloads/Fonts/LuckiestGuy.ttf') format('truetype'); font-display: swap; }
+        
         * { box-sizing: border-box; }
         html { min-height: 100%; }
-        body { margin: 0; min-height: 100vh; color: #fff; background: #0758b6; font-family: Arial, sans-serif; }
+        body { margin: 0; min-height: 100vh; color: #fff; background: #0758b6; font-family: Arial, sans-serif; display: flex; flex-direction: column; }
         a, button { -webkit-tap-highlight-color: transparent; }
         a:focus-visible, button:focus-visible { outline: 3px solid #f5ff00; outline-offset: 5px; }
         [hidden] { display: none !important; }
 
-
-        .news-page { position: relative; isolation: isolate; min-height: calc(100vh - var(--site-nav-height)); overflow: hidden; padding: 58px clamp(22px, 5vw, 100px) 80px; background: #0758b6 url('https://nextieria.ddns.net:45/Downloads/Images/Website/NEWBACKground2.png') center center / cover no-repeat; }
+        .news-page { position: relative; isolation: isolate; flex: 1 0 auto; min-height: calc(100vh - var(--site-nav-height, 80px)); overflow: hidden; padding: 58px clamp(22px, 5vw, 100px) 80px; background: #0758b6 url('https://nextieria.ddns.net:45/Downloads/Images/Website/NEWBACKground2.png') center center / cover no-repeat; }
         .news-inner { max-width: 1480px; margin: 0 auto; perspective: 1200px; }
         .page-heading { text-align: center; margin: 0 0 58px; transform-origin: center bottom; animation: news-pop-in .65s cubic-bezier(.22, 1, .36, 1) both; }
         .page-heading h1 { font-family: 'LuckiestGuy', Impact, sans-serif; font-size: clamp(4.6rem, 8vw, 8rem); font-weight: 400; line-height: .95; letter-spacing: 1px; margin: 0; text-transform: uppercase; text-shadow: 0 5px 0 #03529840; }
@@ -38,13 +41,15 @@
         .news-state p { margin: 0; line-height: 1.6; }
         .retry-button { margin-top: 22px; padding: 13px 28px; border: 0; background: #f5ff00; color: #102746; font-family: 'NewFN', sans-serif; text-transform: uppercase; font-size: 1.3rem; cursor: pointer; }
         .retry-button:hover { background: #fff; }
+
+
         @keyframes news-pop-in {
             0% { opacity: 0; transform: translate3d(0, 65px, -140px) rotateX(10deg) scale(.88); }
             72% { opacity: 1; transform: translate3d(0, -6px, 0) rotateX(0deg) scale(1.015); }
             100% { opacity: 1; transform: translate3d(0, 0, 0) rotateX(0deg) scale(1); }
         }
         @media (max-width: 700px) {
-            .news-page { min-height: calc(100vh - var(--site-nav-height)); padding: 38px 22px 44px; }
+            .news-page { padding: 38px 22px 44px; }
             .page-heading { margin-bottom: 46px; }
             .news-grid { grid-template-columns: 1fr; gap: 38px; }
             .news-card { border-width: 5px; }
@@ -57,6 +62,7 @@
 </head>
 <body>
     <div id="main-nav"></div>
+
     <main class="news-page">
         <div class="news-inner">
             <header class="page-heading"><h1>News</h1></header>
@@ -68,6 +74,9 @@
             <noscript><p class="news-state">Enable JavaScript to load the latest Nextieria news.</p></noscript>
         </div>
     </main>
+
+    <div id="footer"></div>
+
     <script>
         const NEWS_ENDPOINT = 'https://nextieria.ddns.net:4372/content/api/pages/';
         const grid = document.getElementById('news-grid');
