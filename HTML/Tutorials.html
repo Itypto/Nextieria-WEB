@@ -7,13 +7,15 @@
 <title>Nextieria | Tutorials</title>
 <link rel="stylesheet" href="../assets/css/navbar.css">
 <script src="https://nextieria.ddns.net/js/navbar.js" defer></script>
+<link rel="stylesheet" href="../assets/css/footer.css">
+<script src="https://nextieria.ddns.net/js/footer.js" defer></script>
 <style>
 @font-face { font-family: 'NewFN'; src: url('https://nextieria.ddns.net:45/Downloads/Fonts/NewFn.ttf') format('truetype'); }
 @font-face { font-family: 'LuckiestGuy'; src: url('https://nextieria.ddns.net:45/Downloads/Fonts/LuckiestGuy.ttf') format('truetype'); }
 
 * { box-sizing: border-box; }
 
-html, body { margin: 0; min-height: 100%; }
+html, body { margin: 0; min-height: 100%;}
 
 body { font-family: 'NewFN', sans-serif; color: #fff; background: #180028; overflow: auto; }
 
@@ -24,8 +26,8 @@ body { font-family: 'NewFN', sans-serif; color: #fff; background: #180028; overf
 .hero-content { position: relative; z-index: 2; width: min(680px, 100%); animation: textEnter 0.8s cubic-bezier(.2,.8,.2,1) both; }
 .season-label { margin: 0 0 26px; font-family: 'LuckiestGuy', sans-serif; font-size: clamp(2.8rem, 5.4vw, 6.6rem); line-height: 0.95; text-transform: uppercase; text-shadow: 4px 4px 0 rgba(0,0,0,0.36); }
 .tutorial-grid { display: grid; grid-template-columns: repeat(3, minmax(126px, 1fr)); gap: 18px; width: min(620px, 100%);}
-.platform-card { min-height: 142px; padding: 16px 12px 14px; border: 0; background: #f5ff00; color: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; font-family: 'LuckiestGuy', sans-serif; font-size: 1rem; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: transform 0.18s ease, filter 0.18s ease;}
-.platform-card:hover { transform: translateY(-4px) scale(1.03); filter: brightness(1.08); }
+.platform-card { min-height: 142px; padding: 16px 12px 14px; border: 0; background: #f5ff00; color: #000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; font-family: 'LuckiestGuy', sans-serif; font-size: 1rem; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: transform .2s ease, filter 0.18s ease;}
+.platform-card:hover { transform: translateY(-4px) scale(1.04); filter: brightness(1.08); }
 .platform-card img { width: 58px; height: 58px; object-fit: contain; }
 .platform-card small { font-size: 0.82rem; line-height: 1.1; text-align: center; }
 .platform-card.disabled { background: #777; color: #252525; pointer-events: none; filter: grayscale(1); }
@@ -95,5 +97,6 @@ body { font-family: 'NewFN', sans-serif; color: #fff; background: #180028; overf
     </section>
     <img class="hero-skin" src="https://nextieria.ddns.net:45/Downloads/Images/Website/season6-giddyup.png" alt="Giddy Up">
 </main>
+<div id="footer"></div>
 </body>
 </html>
