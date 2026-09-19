@@ -6,8 +6,11 @@
     <title>Nextieria</title>
     <link rel="icon" type="image/x-icon" href="https://nextieria.ddns.net:45/Downloads/Other/NextieriaN.ico?v=a3bd85f6">
     <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    
     <script src="./js/home.js" defer></script>
     <script src="./js/navbar.js" defer></script>
+    <script src="./js/footer.js" defer></script>
     <style>
         @font-face { font-family: 'NewFN'; src: url('https://nextieria.ddns.net:45/Downloads/Fonts/NewFn.ttf') format('truetype'); }
         @font-face { font-family: 'LuckiestGuy'; src: url('https://nextieria.ddns.net:45/Downloads/Fonts/LuckiestGuy.ttf') format('truetype'); }
@@ -15,7 +18,6 @@
         * { box-sizing: border-box; }
 
         body { margin: 0; padding: 0; font-family: 'NewFN', sans-serif; background-color: #101014; color: #fff; }
-
 
         #news-container { width: 100%; margin: 0; height: calc(100vh - 120px); min-height: 560px; position: relative; overflow: hidden; border-radius: 0; background: #000; isolation: isolate; }
         #news-container::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.42) 34%, rgba(0,0,0,0.08) 72%), linear-gradient(0deg, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0) 38%); pointer-events: none; z-index: 1; }
@@ -50,17 +52,6 @@
         .go-top.visible { opacity: 1; visibility: visible; }
         .go-top svg { width: 24px; height: 24px; fill: currentColor; transform: rotate(-90deg); filter: drop-shadow(0 3px 8px rgba(0,0,0,0.75)); }
 
-        .nextieria-links { min-height: 100vh; background: #17171d; padding: clamp(76px, 8vw, 118px) clamp(24px, 5vw, 80px) 56px; display: flex; align-items: center; }
-        .nextieria-links-inner { width: 100%; max-width: 1740px; margin: 0 auto; }
-        .footer-top { display: flex; align-items: center; justify-content: space-between; gap: 28px; }
-        .footer-logo { width: min(280px, 70vw); height: auto; display: block; }
-        .footer-line { height: 1px; background: rgba(255,255,255,0.14); margin: 52px 0 46px; }
-        .footer-columns { display: grid; grid-template-columns: repeat(3, minmax(180px, 1fr)); gap: clamp(40px, 8vw, 150px); }
-        .footer-column h2 { font-family: 'NewFN'; font-size: clamp(1.6rem, 2.1vw, 2.15rem); margin: 0 0 24px; line-height: 1; color: #fff; }
-        .footer-column a { display: block; width: fit-content; color: rgba(255,255,255,0.76); text-decoration: none; font-size: clamp(1.05rem, 1.18vw, 1.25rem); line-height: 1.35; margin: 0 0 16px; transition: color 0.2s ease, transform 0.2s ease; }
-        .footer-column a:hover { color: #fff; transform: translateX(4px); }
-        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.14); margin-top: 46px; padding-top: 30px; color: rgba(255,255,255,0.46); font-size: 0.9rem; line-height: 1.55; }
-
         @keyframes slideTimer {
             from { transform: scaleX(0); }
             to { transform: scaleX(1); }
@@ -87,8 +78,6 @@
         .download-btn:hover { transform: translateY(-3px) scale(1.02); background: #fbff22; }
         .download-btn:active { transform: translateY(0) scale(0.98); }
 
-        footer { text-align: center; padding: 40px; color: #777; font-size: 0.9rem; line-height: 1.5; }
-
         @media (max-width: 800px) {
             #news-container { width: 100%; margin-top: 0; height: calc(100vh - var(--site-nav-height)); min-height: 620px; }
             .news-slide { justify-content: flex-end; padding: 28px 18px 96px; background-position: center top; }
@@ -100,12 +89,6 @@
             .go-top { bottom: 24px; font-size: 0.9rem; }
             .slide-dot { width: 30px; }
             .slide-dot.active { width: 54px; }
-            .nextieria-links { padding: 56px 22px 42px; align-items: flex-start; }
-            .footer-top { align-items: flex-start; }
-            .footer-line { margin: 34px 0 32px; }
-            .footer-columns { grid-template-columns: 1fr; gap: 28px; }
-            .footer-column h2 { margin-bottom: 16px; }
-            .footer-column a { margin-bottom: 12px; }
             .content-section { width: 88%; flex-direction: column; text-align: center; }
             .content-section img { width: 100%; }
         }
@@ -135,38 +118,9 @@
         <p id="player-count">Players online: loading...</p>
     </div>
     <a href="https://nextieria.ddns.net/Download" class="download-btn">DOWNLOAD NOW</a>
-    <section class="nextieria-links" id="nextieria-links">
-        <div class="nextieria-links-inner">
-            <div class="footer-top">
-                <img class="footer-logo" src="https://nextieria.ddns.net:45/Downloads/Images/NextieriaFullName.png" alt="Nextieria">
-            </div>
-            <div class="footer-line"></div>
-            <div class="footer-columns">
-                <div class="footer-column">
-                    <h2>Main</h2>
-                    <a href="https://nextieria.ddns.net">Home</a>
-                    <a href="https://nextieria.ddns.net/Download">Get Nextieria</a>
-                    <a href="https://nextieria.ddns.net/news">News</a>
-                </div>
-                <div class="footer-column">
-                    <h2>More</h2>
-                    <a href="https://nextieria.ddns.net/Info">FAQ/Info</a>
-                    <a href="https://nextieria.ddns.net/eula">Eula</a>
-                    <a href="https://nextieria.ddns.net/events">Events</a>
-                    <a href="https://nextieria.ddns.net/creator">Creator requirements</a>
-                </div>
-                <div class="footer-column">
-                    <h2>Support</h2>
-                    <a href="https://discord.gg/JvdM7D2B9Y">Get help</a>
-                    <a href="https://nextieria.ddns.net/issue">Common issues</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                Nextieria is not affiliated with, endorsed by, or sponsored by Epic Games, Inc. <br>
-                All Fortnite assets are property of Epic Games.
-            </div>
-        </div>
-    </section>
+
+    <div id="footer"></div>
+
     <div class="go-top" id="go-top" role="link" tabindex="0" onclick="goToTop()" onkeydown="handleGoTopKey(event)">
         <svg viewBox="0 0 32 32" aria-hidden="true"><path fill-rule="evenodd" d="M15.058 6.329a1.2 1.2 0 0 0-1.697 0l-2.546 2.545a1.2 1.2 0 0 0 0 1.697l5.43 5.43-5.43 5.43a1.2 1.2 0 0 0 0 1.698l2.546 2.545a1.2 1.2 0 0 0 1.697 0l9.672-9.672z" clip-rule="evenodd"></path></svg>
         <span>Go to the top</span>
