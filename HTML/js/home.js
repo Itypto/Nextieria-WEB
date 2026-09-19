@@ -4,9 +4,6 @@
         let dots = [];
         let slideTimer = null;
 
-        function playAudio() {
-            new Audio('https://www.myinstants.com/media/sounds/fortnite-knocked.mp3').play();
-        }
 
         async function init() {
             try {
