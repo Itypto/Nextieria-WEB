@@ -34,6 +34,7 @@ app.get("/tutorials/android", (req, res) => sendStaticFile(res, "HTML", "Android
 app.get("/tutorials/iOS", (req, res) => sendStaticFile(res, "HTML", "iOSGuide.html"));
 app.get("/creator", (req, res) => sendStaticFile(res, "HTML", "creator.html"));
 app.get("/events", (req, res) => sendStaticFile(res, "HTML", "events.html"));
+app.get("/socials", (req, res) => sendStaticFile(res, "HTML", "socials.html"));
 app.use("/assets", express.static(path.join(__dirname, "assets")));
 app.use("/js", express.static(path.join(__dirname, "HTML", "js")));
 app.use("/HTML", express.static(path.join(__dirname, "HTML")));
