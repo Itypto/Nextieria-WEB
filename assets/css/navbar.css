@@ -2,10 +2,6 @@
     --site-nav-height: 80px;
 }
 
-html {
-    scrollbar-gutter: stable;
-}
-
 .site-nav,
 .site-nav * {
     box-sizing: border-box;
