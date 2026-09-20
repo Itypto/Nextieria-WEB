@@ -38,6 +38,7 @@ app.use("/assets", express.static(path.join(__dirname, "assets")));
 app.use("/js", express.static(path.join(__dirname, "HTML", "js")));
 app.use("/HTML", express.static(path.join(__dirname, "HTML")));
 app.get("/soon", (req, res) => sendStaticFile(res, "HTML", "soon.html"));
+app.get("/system-requirements", (req, res) => sendStaticFile(res, "HTML", "system-requirements.html"));
 app.get("/secret", (req, res) => {
     res.send(`
         <!DOCTYPE html>
