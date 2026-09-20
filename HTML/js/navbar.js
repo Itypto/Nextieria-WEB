@@ -28,7 +28,7 @@ const navbarHTML = `
     </label>
 
     <div class="more-menu" role="menu" aria-hidden="false">
-        <a href="https://nextieria.ddns.net/Info" role="menuitem">Info</a>
+        <a href="https://nextieria.ddns.net/system-requirements" role="menuitem">System Requirements</a>
         <a href="https://nextieria.ddns.net/eula" role="menuitem">Eula</a>
         <a href="https://nextieria.ddns.net/events" role="menuitem">Events</a> 
         <a href="https://nextieria.ddns.net/creator" role="menuitem">Creator requirements</a> 
