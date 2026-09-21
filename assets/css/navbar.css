@@ -147,7 +147,7 @@
 
 .nav-more {
     position: absolute;
-    right: 70px;
+    right: 90px;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
@@ -182,7 +182,7 @@
     display: none;
     position: absolute;
     top: var(--site-nav-height);
-    right: 70px;
+    right: 90px;
     flex-direction: column;
     min-width: 200px;
     background-color: #161616;
@@ -223,5 +223,58 @@
     .more-menu {
         right: 10px;
         top: 75px;
+    }
+}
+
+.site-nav > a.nav-download-btn {
+    position: absolute;
+    right: 150px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: 40px;
+    padding: 0 16px;
+    border: none;
+    border-bottom: none;
+    background: #f5ff00;
+    color: #000;
+    font-family: 'LuckiestGuy', 'NewFN', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 4px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.site-nav > a.nav-download-btn:hover {
+    transform: translateY(-50%) scale(1.03);
+    background-color: #fbff22;
+    color: #000;
+}
+
+.site-nav > a.nav-download-btn:active {
+    transform: translateY(-50%) scale(0.97);
+}
+
+@media (max-width: 900px) {
+    .site-nav > a.nav-download-btn {
+        position: static;
+        transform: none;
+        height: 34px;
+        padding: 0 10px;
+        font-size: 0.85rem;
+    }
+
+    .site-nav > a.nav-download-btn:hover {
+        transform: scale(1.03);
+    }
+
+    .site-nav > a.nav-download-btn:active {
+        transform: scale(0.97);
     }
 }
