@@ -49,7 +49,7 @@
                 const playerData = await playerRes.json();
                 document.getElementById('player-count').innerText = "Players online: " + playerData.Clients.amount;
             } catch (e) {
-                document.getElementById('player-count').innerText = "Players online: unavailable";
+                document.getElementById('player-count').innerText = "";
             }
         }
 
