@@ -19,6 +19,7 @@ const navbarHTML = `
     <a href="https://nextieria.ddns.net/shop">Shop</a>
     <a href="https://nextieria.ddns.net/tutorials/">Tutorials</a>
     <a href="https://nextieria.ddns.net/news">News</a>
+    <a href="https://nextieria.ddns.net/Download" class="nav-download-btn">DOWNLOAD NOW</a>
 
     <input type="checkbox" id="nav-more-toggle" class="more-toggle" hidden> 
     <label for="nav-more-toggle" class="nav-more" aria-label="More options">
@@ -43,8 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navContainer.innerHTML = navbarHTML;
 
         const currentPath = window.location.pathname;
-
-        const links = navContainer.querySelectorAll('a');
+        const links = navContainer.querySelectorAll('a:not(.nav-download-btn)');
 
         links.forEach(link => {
             const linkPath = new URL(link.href, window.location.origin).pathname;
