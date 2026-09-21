@@ -74,10 +74,6 @@
         #players-section { width: min(86%, 1200px); margin: 54px auto 0; text-align: center; }
         #player-count { font-family: 'NewFN', sans-serif; font-size: 1.2rem; color: rgba(255,255,255,0.82); margin: 0; }
 
-        .download-btn { display: flex; align-items: center; justify-content: center; width: min(360px, 86%); min-height: 68px; margin: 50px auto 20px auto; padding: 15px 36px; border: 0; background: #f5ff00; color: #000; text-align: center; font-family: 'LuckiestGuy'; font-size: clamp(1.55rem, 2.4vw, 2.35rem); text-transform: uppercase; text-decoration: none; border-radius: 0; transition: transform 0.2s ease, background 0.2s ease; }
-        .download-btn:hover { transform: translateY(-3px) scale(1.02); background: #fbff22; }
-        .download-btn:active { transform: translateY(0) scale(0.98); }
-
         @media (max-width: 800px) {
             #news-container { width: 100%; margin-top: 0; height: calc(100vh - var(--site-nav-height)); min-height: 620px; }
             .news-slide { justify-content: flex-end; padding: 28px 18px 96px; background-position: center top; }
@@ -115,9 +111,8 @@
     </div>
     <div id="extra-content"></div>
     <div id="players-section">
-        <p id="player-count">Players online: loading...</p>
+        <p id="player-count"></p>
     </div>
-    <a href="https://nextieria.ddns.net/Download" class="download-btn">DOWNLOAD NOW</a>
 
     <div id="footer"></div>
 
