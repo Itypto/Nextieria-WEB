@@ -19,7 +19,9 @@ function sendStaticFile(res, ...parts) {
     if (!fs.existsSync(filePath)) return res.status(404).send("File not found");
     return res.sendFile(filePath);
 }
-
+//news start
+app.get("/news/mobile-60-fps", (req, res) => sendStaticFile(res, "HTML", "News", "mobile60fps.html"));
+//news end
 app.get(["/", "/Nextieria/home"], (req, res) => sendStaticFile(res, "HTML", "Home.html"));
 app.get("/shop", (req, res) => sendStaticFile(res, "HTML", "shop.html"));
 app.get("/status", (req, res) => sendStaticFile(res, "HTML", "Status.html"));
