@@ -3,166 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The latest news, events, and updates from Nextieria.">
-    <title>Nextieria | News</title>
+    <link rel="stylesheet" href="../assets/css/news.css">
     <link rel="icon" type="image/x-icon" href="https://nextieria.ddns.net:45/Downloads/Other/NextieriaN.ico?v=a3bd85f6">
-    <link rel="stylesheet" href="../assets/css/navbar.css">
     <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
     <script src="./js/navbar.js" defer></script>
     <script src="./js/footer.js" defer></script>
-    
-    <style>
-        @font-face { font-family: 'NewFN'; src: url('https://nextieria.ddns.net:45/Downloads/Fonts/NewFn.ttf') format('truetype'); font-display: swap; }
-        @font-face { font-family: 'LuckiestGuy'; src: url('https://nextieria.ddns.net:45/Downloads/Fonts/LuckiestGuy.ttf') format('truetype'); font-display: swap; }
-        
-        * { box-sizing: border-box; }
-        html { min-height: 100%; }
-        body { margin: 0; min-height: 100vh; color: #fff; background: #0758b6; font-family: Arial, sans-serif; display: flex; flex-direction: column; }
-        a, button { -webkit-tap-highlight-color: transparent; }
-        a:focus-visible, button:focus-visible { outline: 3px solid #f5ff00; outline-offset: 5px; }
-        [hidden] { display: none !important; }
-
-        .news-page { position: relative; isolation: isolate; flex: 1 0 auto; min-height: calc(100vh - var(--site-nav-height, 80px)); overflow: hidden; padding: 58px clamp(22px, 5vw, 100px) 80px; background: #0758b6 url('https://nextieria.ddns.net:45/Downloads/Images/Website/NEWBACKground2.png') center center / cover no-repeat; }
-        .news-inner { max-width: 1480px; margin: 0 auto; perspective: 1200px; }
-        .page-heading { text-align: center; margin: 0 0 58px; transform-origin: center bottom; animation: news-pop-in .65s cubic-bezier(.22, 1, .36, 1) both; }
-        .page-heading h1 { font-family: 'LuckiestGuy', Impact, sans-serif; font-size: clamp(4.6rem, 8vw, 8rem); font-weight: 400; line-height: .95; letter-spacing: 1px; margin: 0; text-transform: uppercase; text-shadow: 0 5px 0 #03529840; }
-        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 390px), 1fr)); align-items: stretch; gap: 40px 30px; perspective: 1200px; }
-        .news-card { position: relative; min-width: 0; background: #fff; border: 6px solid #fff; color: #102746; box-shadow: 0 8px 0 #044b932b; transform-origin: center bottom; animation: news-pop-in .75s cubic-bezier(.22, 1, .36, 1) both; animation-delay: var(--entry-delay, .12s); }
-        .news-card:only-child { width: 100%; max-width: 900px; justify-self: center; }
-        .news-tag { position: absolute; top: -19px; left: -15px; z-index: 1; max-width: calc(100% - 12px); margin: 0; padding: 4px; background: #fff; clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%); filter: drop-shadow(0 2px 1px #123c6866); }
-        .news-tag span { display: block; padding: 7px 28px 6px 15px; background: #e45080; color: #fff; font-family: 'NewFN', Impact, sans-serif; font-size: 1.25rem; line-height: 1.1; text-transform: uppercase; overflow-wrap: anywhere; clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%); }
-        .news-media { aspect-ratio: 2 / 1; background: #083b74; overflow: hidden; display: grid; place-items: center; }
-        .news-media img { width: 100%; height: 100%; display: block; object-fit: cover; }
-        .image-unavailable { color: #b7dff8; font-family: 'NewFN', sans-serif; font-size: 1.4rem; padding: 28px; text-align: center; }
-        .news-copy { padding: 25px 28px 30px; }
-        .news-copy h2 { font-family: 'NewFN', Impact, sans-serif; font-size: clamp(1.7rem, 2.25vw, 2.4rem); font-weight: 400; line-height: 1.08; text-transform: uppercase; overflow-wrap: anywhere; margin: 0 0 15px; }
-        .news-copy p { margin: 0; font-family: 'NewFN', sans-serif; font-size: clamp(1rem, 1.15vw, 1.15rem); line-height: 1.6; color: #21657e; white-space: pre-line; overflow-wrap: anywhere; }
-        .news-state { text-align: center; padding: 55px 24px; background: #064b8838; border: 1px solid #ffffff40; }
-        .news-state p { margin: 0; line-height: 1.6; }
-        .retry-button { margin-top: 22px; padding: 13px 28px; border: 0; background: #f5ff00; color: #102746; font-family: 'NewFN', sans-serif; text-transform: uppercase; font-size: 1.3rem; cursor: pointer; }
-        .retry-button:hover { background: #fff; }
-
-
-        @keyframes news-pop-in {
-            0% { opacity: 0; transform: translate3d(0, 65px, -140px) rotateX(10deg) scale(.88); }
-            72% { opacity: 1; transform: translate3d(0, -6px, 0) rotateX(0deg) scale(1.015); }
-            100% { opacity: 1; transform: translate3d(0, 0, 0) rotateX(0deg) scale(1); }
-        }
-        @media (max-width: 700px) {
-            .news-page { padding: 38px 22px 44px; }
-            .page-heading { margin-bottom: 46px; }
-            .news-grid { grid-template-columns: 1fr; gap: 38px; }
-            .news-card { border-width: 5px; }
-            .news-copy { padding: 22px 17px 25px; }
-            .news-tag { left: -12px; }
-            .news-tag span { font-size: 1.1rem; }
-        }
-        @media (prefers-reduced-motion: reduce) { .page-heading, .news-card { animation: none; } }
-    </style>
+    <title>Nextieria | News</title>
 </head>
 <body>
+
     <div id="main-nav"></div>
 
-    <main class="news-page">
-        <div class="news-inner">
-            <header class="page-heading"><h1>News</h1></header>
-            <section id="news-grid" class="news-grid" aria-label="Latest Nextieria updates" aria-busy="true"></section>
-            <div id="news-state" class="news-state">
-                <p id="news-status" role="status" aria-live="polite">Loading the latest news…</p>
-                <button id="retry-button" class="retry-button" type="button" hidden>Try again</button>
+<div class="news-wrapper">
+    <div class="news-grid" id="news-container">
+        <a href="/news/mobile-60-fps" class="news-item">
+            <img src="https://nextieria.ddns.net:45/Downloads/Images/Website/News/mobile60fpsheaderimg.jpg" alt="News">
+            <div class="news-info">
+                <div class="news-date">SEP 26, 2026</div>
+                <div class="news-title">60FPS OPTION FOR MOBILE!</div>
             </div>
-            <noscript><p class="news-state">Enable JavaScript to load the latest Nextieria news.</p></noscript>
-        </div>
-    </main>
+        </a>
+    </div>
+</div>
+<div id="footer"></div>
 
-    <div id="footer"></div>
+<script>
+    const items = document.querySelectorAll('#news-container .news-item');
+    let largeBlockCount = 0;
 
-    <script>
-        const NEWS_ENDPOINT = 'https://nextieria.ddns.net:4372/content/api/pages/';
-        const grid = document.getElementById('news-grid');
-        const state = document.getElementById('news-state');
-        const status = document.getElementById('news-status');
-        const retry = document.getElementById('retry-button');
-
-        function createNewsCard(message, index) {
-            const card = document.createElement('article');
-            card.className = 'news-card';
-            card.style.setProperty('--entry-delay', `${.12 + Math.min(index, 6) * .1}s`);
-            card.setAttribute('aria-labelledby', `news-title-${index}`);
-
-            if (typeof message.adspace === 'string' && message.adspace.trim()) {
-                const tag = document.createElement('p');
-                tag.className = 'news-tag';
-                const label = document.createElement('span');
-                label.textContent = message.adspace;
-                tag.append(label);
-                card.append(tag);
-            }
-
-            const media = document.createElement('div');
-            media.className = 'news-media';
-            const showImageFallback = () => {
-                const fallback = document.createElement('span');
-                fallback.className = 'image-unavailable';
-                fallback.textContent = 'Image unavailable';
-                media.replaceChildren(fallback);
-            };
-            try {
-                if (typeof message.image !== 'string' || !message.image.trim()) throw new Error('Missing image');
-                const imageUrl = new URL(message.image, NEWS_ENDPOINT);
-                if (!['https:', 'http:'].includes(imageUrl.protocol)) throw new Error('Invalid image URL');
-                const image = document.createElement('img');
-                image.alt = '';
-                image.decoding = 'async';
-                image.loading = index < 2 ? 'eager' : 'lazy';
-                image.addEventListener('error', showImageFallback, { once: true });
-                image.src = imageUrl.href;
-                media.append(image);
-            } catch {
-                showImageFallback();
-            }
-
-            const copy = document.createElement('div');
-            copy.className = 'news-copy';
-            const title = document.createElement('h2');
-            title.id = `news-title-${index}`;
-            title.textContent = typeof message.title === 'string' && message.title.trim() ? message.title : 'Nextieria update';
-            const body = document.createElement('p');
-            body.textContent = typeof message.body === 'string' ? message.body : '';
-            copy.append(title, body);
-            card.append(media, copy);
-            return card;
+    items.forEach((item, index) => {
+        if (index === 0) {
+            item.classList.add('hero-banner');
+            return;
         }
 
-        async function loadNews() {
-            grid.setAttribute('aria-busy', 'true');
-            state.hidden = false;
-            retry.hidden = true;
-            status.textContent = 'Loading the latest news…';
-            const controller = new AbortController();
-            const timeout = setTimeout(() => controller.abort(), 15000);
-            try {
-                const response = await fetch(NEWS_ENDPOINT, { cache: 'no-store', signal: controller.signal });
-                if (!response.ok) throw new Error(`News request failed (${response.status})`);
-                const data = await response.json();
-                const messages = data?.battleroyalenews?.news?.messages;
-                if (!Array.isArray(messages)) throw new Error('The news feed has an unexpected format');
-                const visible = messages.filter(message => message && typeof message === 'object' && !Array.isArray(message) && message.hidden !== true);
-                grid.replaceChildren(...visible.map(createNewsCard));
-                state.hidden = visible.length > 0;
-                status.textContent = visible.length ? '' : 'No news just yet. Check back soon!';
-            } catch (error) {
-                status.textContent = 'We couldn’t load the news right now. Please try again.';
-                retry.hidden = false;
-                console.error('Unable to load Nextieria news:', error);
-            } finally {
-                clearTimeout(timeout);
-                grid.setAttribute('aria-busy', 'false');
-            }
-        }
+        const patternIndex = (index - 1) % 6;
 
-        retry.addEventListener('click', loadNews);
-        loadNews();       
-    </script>
+        if (patternIndex === 0 || patternIndex === 1) {
+            if (patternIndex === 0) {
+                largeBlockCount++;
+            }
+            
+            const isEvenBlock = largeBlockCount % 2 === 0;
+            
+            if (patternIndex === 0) {
+                item.classList.add('card', 'card-large', isEvenBlock ? 'card-large-right' : 'card-large-left');
+            } else {
+                item.classList.add('card', 'card-large', isEvenBlock ? 'card-large-left' : 'card-large-right');
+            }
+        } else {
+            item.classList.add('card', 'card-small');
+        }
+    });
+</script>
+
 </body>
 </html>
