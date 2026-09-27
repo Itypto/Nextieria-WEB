@@ -20,7 +20,7 @@ function sendStaticFile(res, ...parts) {
     return res.sendFile(filePath);
 }
 //news start
-app.get("/news/mobile-60-fps", (req, res) => sendStaticFile(res, "HTML", "News", "mobile60fps.html"));
+app.get("/news/mobile-60-fps", (req, res) => sendStaticFile(res, "HTML", "news", "mobile60fps.html"));
 //news end
 app.get(["/", "/Nextieria/home"], (req, res) => sendStaticFile(res, "HTML", "Home.html"));
 app.get("/shop", (req, res) => sendStaticFile(res, "HTML", "shop.html"));
@@ -39,6 +39,7 @@ app.get("/events", (req, res) => sendStaticFile(res, "HTML", "events.html"));
 app.use("/assets", express.static(path.join(__dirname, "assets")));
 app.use("/js", express.static(path.join(__dirname, "HTML", "js")));
 app.use("/HTML", express.static(path.join(__dirname, "HTML")));
+app.use("/HTML/news", express.static(path.join(__dirname, "HTML", "news")));
 app.get("/soon", (req, res) => sendStaticFile(res, "HTML", "soon.html"));
 app.get("/system-requirements", (req, res) => sendStaticFile(res, "HTML", "system-requirements.html"));
 app.get("/secret", (req, res) => {
