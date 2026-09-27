@@ -100,7 +100,7 @@
     white-space: nowrap;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
     :root { --site-nav-height: 138px; }
 
     .site-nav {
@@ -261,8 +261,15 @@
     transform: translateY(-50%) scale(0.97);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
     .site-nav > a.nav-download-btn {
+        display: none;
+    }
+}
+
+@media (max-width: 1000px) {
+    .site-nav > a.nav-download-btn {
+        display: inline-flex; 
         position: static;
         transform: none;
         height: 34px;
