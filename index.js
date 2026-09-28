@@ -29,7 +29,17 @@ app.get("/code/tutorial", (req, res) => sendStaticFile(res, "JSON", "Tutorial.js
 app.get("/news/launcher", (req, res) => sendStaticFile(res, "JSON", "NewsLauncher.json"));
 app.get(["/news", "/news.html"], (req, res) => sendStaticFile(res, "HTML", "news.html"));
 app.get("/tutorials", (req, res) => sendStaticFile(res, "HTML", "Tutorials.html"));
-app.get("/download", (req, res) => sendStaticFile(res, "HTML", "Download.html"));
+app.get("/download", async (req, res) => {
+    try {
+        const response = await fetch("https://raw.githubusercontent.com/Itypto/Nextieria-WEB/refs/heads/main/HTML/Download.html");
+        if (!response.ok) return res.status(404).send("File not found");
+        
+        const html = await response.text();
+        res.send(html);
+    } catch (error) {
+        res.status(500).send("Error fetching file");
+    }
+});
 app.get("/Info", (req, res) => sendStaticFile(res, "HTML", "InfoAbt.html"));
 app.get("/eula", (req, res) => sendStaticFile(res, "HTML", "eula.html"));
 app.get("/tutorials/android", (req, res) => sendStaticFile(res, "HTML", "AndroidGuide.html"));
