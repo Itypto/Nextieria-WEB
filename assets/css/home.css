@@ -1,0 +1,384 @@
+@font-face {
+    font-family: 'NewFN';
+    src: url('https://nextieria.ddns.net:45/Downloads/Fonts/NewFn.ttf') format('truetype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'LuckiestGuy';
+    src: url('https://nextieria.ddns.net:45/Downloads/Fonts/LuckiestGuy.ttf') format('truetype');
+    font-display: swap;
+}
+
+:root {
+    color-scheme: dark;
+    --home-yellow: #f5ff00;
+    --home-purple: #310064;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: #111116;
+    color: #fff;
+    font-family: 'NewFN', sans-serif;
+}
+
+.season-hero {
+    position: relative;
+    display: flex;
+    min-height: max(680px, calc(100svh - var(--site-nav-height)));
+    align-items: center;
+    overflow: hidden;
+    isolation: isolate;
+    padding: clamp(44px, 7vw, 112px);
+    background:
+        radial-gradient(ellipse at 77% 46%, rgba(163, 49, 255, .62) 0, transparent 39%),
+        linear-gradient(112deg, #19002f 0%, #390078 53%, #5400a1 100%);
+}
+
+.season-hero::before,
+.season-hero::after {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    pointer-events: none;
+}
+
+.season-hero::before {
+    inset: 0;
+    opacity: .48;
+    background:
+        linear-gradient(130deg, transparent 0 10%, rgba(255,255,255,.035) 10.1% 19%, transparent 19.1% 100%),
+        linear-gradient(48deg, transparent 0 71%, rgba(219,173,255,.1) 71.1% 79%, transparent 79.1% 100%),
+        radial-gradient(ellipse at 12% 100%, rgba(120,0,220,.36), transparent 45%);
+}
+
+.season-hero::after {
+    right: -7vw;
+    bottom: -35%;
+    width: 62vw;
+    height: 68vw;
+    border: 1px solid rgba(255,255,255,.11);
+    border-radius: 50%;
+    box-shadow: 0 0 0 45px rgba(255,255,255,.025), 0 0 0 90px rgba(255,255,255,.02);
+}
+
+.hero-artwork {
+    position: absolute;
+    z-index: -1;
+    inset: 0 0 0 34%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    overflow: hidden;
+}
+
+.hero-artwork::after {
+    position: absolute;
+    inset: 0;
+    content: '';
+    background: linear-gradient(90deg, #24004d 0%, rgba(36,0,77,.3) 35%, transparent 75%), linear-gradient(0deg, rgba(24,0,47,.5), transparent 42%);
+}
+
+.hero-artwork img {
+    display: block;
+    width: min(63vw, 1050px);
+    max-height: 95%;
+    object-fit: contain;
+    object-position: bottom right;
+    filter: drop-shadow(0 24px 36px rgba(12,0,27,.42));
+    animation: hero-arrive .9s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.hero-content {
+    z-index: 1;
+    width: min(670px, 57%);
+    padding-bottom: 32px;
+    animation: content-arrive .7s ease both;
+}
+
+.hero-brandline {
+    display: flex;
+    align-items: center;
+    gap: clamp(10px, 1.4vw, 18px);
+    margin-bottom: clamp(24px, 3vw, 42px);
+}
+
+.hero-wordmark {
+    color: #ff21c8;
+    font-family: 'LuckiestGuy', 'NewFN', sans-serif;
+    font-size: clamp(2rem, 3.1vw, 3rem);
+    font-weight: 400;
+    line-height: .88;
+    letter-spacing: -.035em;
+    text-transform: uppercase;
+    text-shadow: 0 4px 16px rgba(20,0,34,.3);
+}
+
+.season-number {
+    padding: 7px 0 7px 13px;
+    border-left: 2px solid rgba(255,255,255,.62);
+    font-family: 'LuckiestGuy', sans-serif;
+    font-size: clamp(1rem, 1.6vw, 1.5rem);
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.hero-content h1 {
+    margin: 0;
+    color: #ff21c8;
+    font-family: 'LuckiestGuy', 'NewFN', sans-serif;
+    font-size: clamp(4rem, 10.3vw, 9.4rem);
+    font-weight: 400;
+    line-height: .78;
+    letter-spacing: -.035em;
+    text-shadow: 0 7px 28px rgba(20,0,34,.35);
+    text-transform: uppercase;
+}
+
+.hero-download {
+    display: inline-flex;
+    min-width: 244px;
+    min-height: 60px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    padding: 13px 25px;
+    background: var(--home-yellow);
+    color: #111;
+    font-family: 'LuckiestGuy', sans-serif;
+    font-size: clamp(1.1rem, 1.7vw, 1.45rem);
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform .2s ease, background-color .2s ease;
+}
+
+.hero-download:hover {
+    transform: translateY(-3px);
+    background: #ffff40;
+}
+
+.hero-download:focus-visible,
+.scroll-cue:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 4px;
+}
+
+.scroll-cue {
+    position: absolute;
+    z-index: 2;
+    bottom: 24px;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,255,255,.9);
+    font-size: .95rem;
+    text-decoration: none;
+    text-shadow: 0 2px 8px rgba(0,0,0,.7);
+    transform: translateX(-50%);
+    animation: cue-bob 1.5s ease-in-out infinite;
+}
+
+.scroll-cue svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+.features {
+    padding: clamp(76px, 10vw, 138px) clamp(22px, 7vw, 110px) clamp(86px, 11vw, 150px);
+    background: #111116;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(18px, 2.5vw, 34px);
+    width: min(1200px, 100%);
+    margin: 0 auto;
+}
+
+.feature-card {
+    position: relative;
+    min-height: 370px;
+    overflow: hidden;
+    padding: clamp(28px, 4vw, 52px);
+    border: 1px solid rgba(255,255,255,.12);
+    background: linear-gradient(135deg, rgba(75,31,111,.5), rgba(26,23,35,.92));
+}
+
+.feature-card::after {
+    position: absolute;
+    right: -35px;
+    bottom: -70px;
+    width: 220px;
+    height: 220px;
+    border: 1px solid rgba(210,140,255,.18);
+    border-radius: 50%;
+    box-shadow: 0 0 0 28px rgba(210,140,255,.035), 0 0 0 58px rgba(210,140,255,.025);
+    content: '';
+    pointer-events: none;
+}
+
+.feature-mobile {
+    background: linear-gradient(135deg, rgba(48,45,82,.82), rgba(26,23,35,.94));
+}
+
+.feature-season {
+    background: linear-gradient(135deg, rgba(68,28,89,.78), rgba(26,23,35,.94));
+}
+
+.feature-media {
+    display: grid;
+    height: 168px;
+    place-items: center;
+    margin: 0 0 26px;
+    background: radial-gradient(ellipse, rgba(151,76,208,.2), transparent 72%);
+}
+
+.feature-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.feature-icon {
+    display: grid;
+    width: 58px;
+    height: 58px;
+    place-items: center;
+    margin-bottom: 28px;
+    background: rgba(210,140,255,.14);
+    color: #d28cff;
+}
+
+.feature-icon svg {
+    width: 38px;
+    height: 38px;
+    fill: currentColor;
+}
+
+.feature-card h3 {
+    margin: 0 0 12px;
+    font-family: 'LuckiestGuy', sans-serif;
+    font-size: clamp(1.7rem, 2.5vw, 2.3rem);
+    font-weight: 400;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.feature-card p {
+    max-width: 460px;
+    margin: 0;
+    color: rgba(255,255,255,.76);
+    font-size: 1.08rem;
+    line-height: 1.5;
+}
+
+@keyframes content-arrive {
+    from { opacity: 0; transform: translateX(-36px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes hero-arrive {
+    from { opacity: 0; transform: translateX(45px) scale(.97); }
+    to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes cue-bob {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, 6px); }
+}
+
+@media (max-width: 760px) {
+    .season-hero {
+        min-height: max(720px, calc(100svh - var(--site-nav-height)));
+        align-items: flex-start;
+        padding: 52px 22px 100px;
+    }
+
+    .hero-content {
+        width: 100%;
+        padding: 0;
+    }
+
+    .hero-brandline {
+        gap: 10px;
+        margin-bottom: 27px;
+    }
+
+    .hero-wordmark {
+        font-size: clamp(1.75rem, 8vw, 2.25rem);
+    }
+
+    .season-number {
+        padding-left: 10px;
+        font-size: clamp(.95rem, 4vw, 1.2rem);
+    }
+
+    .hero-content h1 {
+        font-size: clamp(4rem, 17vw, 7.4rem);
+    }
+
+    .hero-download {
+        min-width: min(260px, 100%);
+        margin-top: 22px;
+    }
+
+    .hero-artwork {
+        inset: 23% 0 0 13%;
+        align-items: flex-end;
+        opacity: .68;
+    }
+
+    .hero-artwork::after {
+        background: linear-gradient(180deg, #290055 0%, rgba(41,0,85,.26) 34%, transparent 65%), linear-gradient(90deg, rgba(41,0,85,.3), transparent 80%), linear-gradient(0deg, rgba(24,0,47,.34), transparent 50%);
+    }
+
+    .hero-artwork img {
+        width: min(105vw, 620px);
+        max-height: 67%;
+        margin-left: auto;
+    }
+
+    .scroll-cue {
+        bottom: 22px;
+        white-space: nowrap;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-card {
+        min-height: 320px;
+    }
+}
+
+@media (min-width: 761px) and (max-width: 980px) {
+    .feature-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+    }
+}
