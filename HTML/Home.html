@@ -3,122 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nextieria</title>
+    <meta name="theme-color" content="#210044">
+    <title>Nextieria | Season 6</title>
     <link rel="icon" type="image/x-icon" href="https://nextieria.ddns.net:45/Downloads/Other/NextieriaN.ico?v=a3bd85f6">
     <link rel="stylesheet" href="../assets/css/navbar.css">
     <link rel="stylesheet" href="../assets/css/footer.css">
-    
-    <script src="./js/home.js" defer></script>
+    <link rel="stylesheet" href="../assets/css/home.css">
     <script src="./js/navbar.js" defer></script>
     <script src="./js/footer.js" defer></script>
-    <style>
-        @font-face { font-family: 'NewFN'; src: url('https://nextieria.ddns.net:45/Downloads/Fonts/NewFn.ttf') format('truetype'); }
-        @font-face { font-family: 'LuckiestGuy'; src: url('https://nextieria.ddns.net:45/Downloads/Fonts/LuckiestGuy.ttf') format('truetype'); }
-
-        * { box-sizing: border-box; }
-
-        body { margin: 0; padding: 0; font-family: 'NewFN', sans-serif; background-color: #101014; color: #fff; }
-
-        #news-container { width: 100%; margin: 0; height: calc(100vh - 120px); min-height: 560px; position: relative; overflow: hidden; border-radius: 0; background: #000; isolation: isolate; }
-        #news-container::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.42) 34%, rgba(0,0,0,0.08) 72%), linear-gradient(0deg, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0) 38%); pointer-events: none; z-index: 1; }
-        .news-slide { width: 100%; height: 100%; position: absolute; inset: 0; background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; padding: clamp(32px, 6vw, 90px); opacity: 0; visibility: hidden; transform: scale(1.035); transition: opacity 0.6s ease, visibility 0.6s ease, transform 2.8s ease; }
-        .news-slide.active { opacity: 1; visibility: visible; transform: scale(1); }
-        .news-content { position: relative; z-index: 2; width: min(480px, 92%); display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
-        .news-content h2 { font-family: 'NewFN'; font-size: clamp(2.5rem, 5vw, 5.5rem); line-height: 0.92; margin: 0; text-shadow: 0 4px 18px rgba(0,0,0,0.75); text-transform: uppercase; }
-        .news-content p { font-size: clamp(1rem, 1.35vw, 1.3rem); line-height: 1.38; margin: 0; text-shadow: 0 3px 12px rgba(0,0,0,0.7); }
-        .news-btn { font-family: 'LuckiestGuy'; background: #fff; color: #000; padding: 13px 24px; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; border: none; font-size: 1.05rem; min-height: 48px; border-radius: 6px; letter-spacing: 0.4px; transition: transform 0.2s ease, background 0.2s ease; }
-        .news-btn:hover { transform: translateY(-2px); background: #ffe100; }
-
-        .hero-controls { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
-        .slide-dots { position: absolute; left: 50%; bottom: clamp(20px, 3vw, 42px); transform: translateX(-50%); display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; pointer-events: auto; }
-        .slide-dot { width: 44px; height: 4px; border: 0; border-radius: 999px; background: rgba(255,255,255,0.38); padding: 0; overflow: hidden; cursor: pointer; transition: width 0.2s ease, background 0.2s ease, transform 0.2s ease; }
-        .slide-dot:hover { background: rgba(255,255,255,0.72); transform: scaleY(1.35); }
-        .slide-dot.active { width: 72px; background: rgba(255,255,255,0.34); }
-        .slide-dot span { display: block; width: 100%; height: 100%; border-radius: inherit; background: #fff; transform: scaleX(0); transform-origin: left center; }
-        .slide-dot.active span { animation: slideTimer var(--slide-duration, 6500ms) linear forwards; }
-
-        .arrow-controls { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(16px, 2.8vw, 44px); pointer-events: none; }
-        .nav-btn { width: 48px; height: 48px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; background: rgba(255,255,255,0.92); border: none; color: #101014; border-radius: 6px; padding: 0; transition: transform 0.18s ease, background 0.18s ease, opacity 0.18s ease; }
-        .nav-btn { pointer-events: auto; }
-        .nav-btn:hover { transform: translateY(-2px); background: #fff; }
-        .nav-btn:active { transform: translateY(0) scale(0.96); }
-        .nav-btn svg { width: 32px; height: 32px; fill: currentColor; }
-        .scroll-more { position: absolute; left: 50%; bottom: clamp(72px, 7vw, 100px); z-index: 5; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0; border: 0; background: transparent; color: #fff; font-family: 'NewFN', sans-serif; font-size: 1rem; cursor: pointer; opacity: 1; visibility: visible; text-shadow: 0 3px 12px rgba(0,0,0,0.85); animation: scrollJump 1.4s ease-in-out infinite; transition: opacity 0.25s ease, visibility 0.25s ease, color 0.2s ease; }
-        .scroll-more:hover { color: #ffe100; }
-        .scroll-more.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-        .scroll-more svg { width: 24px; height: 24px; fill: currentColor; transform: rotate(90deg); filter: drop-shadow(0 3px 8px rgba(0,0,0,0.75)); }
-        .go-top { position: fixed; left: 50%; bottom: 34px; z-index: 20; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0; border: 0; background: transparent; color: #fff; font-family: 'NewFN', sans-serif; font-size: 1rem; cursor: pointer; opacity: 0; visibility: hidden; text-shadow: 0 3px 12px rgba(0,0,0,0.85); animation: topJump 1.4s ease-in-out infinite; transition: opacity 0.25s ease, visibility 0.25s ease, color 0.2s ease; }
-        .go-top:hover { color: #ffe100; }
-        .go-top.visible { opacity: 1; visibility: visible; }
-        .go-top svg { width: 24px; height: 24px; fill: currentColor; transform: rotate(-90deg); filter: drop-shadow(0 3px 8px rgba(0,0,0,0.75)); }
-
-        @keyframes slideTimer {
-            from { transform: scaleX(0); }
-            to { transform: scaleX(1); }
-        }
-
-        @keyframes scrollJump {
-            0%, 100% { transform: translate(-50%, 0); }
-            50% { transform: translate(-50%, 10px); }
-        }
-
-        @keyframes topJump {
-            0%, 100% { transform: translate(-50%, 0); }
-            50% { transform: translate(-50%, -10px); }
-        }
-
-        .content-section { width: min(86%, 1200px); margin: 60px auto; display: flex; gap: 40px; align-items: center; }
-        .content-section img { width: 50%; border-radius: 10px; }
-        .content-section h2 { font-family: 'NewFN'; font-size: 2.5rem; margin-top: 0; }
-
-        #players-section { width: min(86%, 1200px); margin: 54px auto 0; text-align: center; }
-        #player-count { font-family: 'NewFN', sans-serif; font-size: 1.2rem; color: rgba(255,255,255,0.82); margin: 0; }
-
-        @media (max-width: 800px) {
-            #news-container { width: 100%; margin-top: 0; height: calc(100vh - var(--site-nav-height)); min-height: 620px; }
-            .news-slide { justify-content: flex-end; padding: 28px 18px 96px; background-position: center top; }
-            .news-content { width: 100%; }
-            .slide-dots { bottom: 18px; }
-            .arrow-controls { padding: 0 12px; }
-            .nav-btn { width: 42px; height: 42px; }
-            .scroll-more { bottom: 76px; font-size: 0.9rem; }
-            .go-top { bottom: 24px; font-size: 0.9rem; }
-            .slide-dot { width: 30px; }
-            .slide-dot.active { width: 54px; }
-            .content-section { width: 88%; flex-direction: column; text-align: center; }
-            .content-section img { width: 100%; }
-        }
-    </style>
 </head>
 <body>
     <div id="main-nav"></div>
-    <div id="news-container">
-        <div class="hero-controls">
-            <div class="slide-dots" id="slide-dots"></div>
-            <div class="arrow-controls">
-                <button class="nav-btn" type="button" aria-label="Previous" onclick="prevSlide()">
-                    <svg viewBox="0 0 32 32" aria-hidden="true"><path fill-rule="evenodd" d="M16.942 6.329a1.2 1.2 0 0 1 1.697 0l2.546 2.546a1.2 1.2 0 0 1 0 1.697l-5.43 5.43 5.43 5.43a1.2 1.2 0 0 1 0 1.697l-2.546 2.545a1.2 1.2 0 0 1-1.697 0L7.27 16.002z" clip-rule="evenodd"></path></svg>
-                </button>
-                <button class="nav-btn" type="button" aria-label="Next" onclick="nextSlide()">
-                    <svg viewBox="0 0 32 32" aria-hidden="true"><path fill-rule="evenodd" d="M15.058 6.329a1.2 1.2 0 0 0-1.697 0l-2.546 2.545a1.2 1.2 0 0 0 0 1.697l5.43 5.43-5.43 5.43a1.2 1.2 0 0 0 0 1.698l2.546 2.545a1.2 1.2 0 0 0 1.697 0l9.672-9.672z" clip-rule="evenodd"></path></svg>
-                </button>
+
+    <main>
+        <section class="season-hero" aria-labelledby="season-title">
+            <div class="hero-artwork" aria-hidden="true">
+                <img src="https://nextieria.ddns.net:45/Downloads/Images/Website/DJYonder.png" alt="">
             </div>
-        </div>
-        <div class="scroll-more" id="scroll-more" role="link" tabindex="0" onclick="scrollPastHero()" onkeydown="handleScrollMoreKey(event)">
-            <span>Scroll down for more</span>
-            <svg viewBox="0 0 32 32" aria-hidden="true"><path fill-rule="evenodd" d="M15.058 6.329a1.2 1.2 0 0 0-1.697 0l-2.546 2.545a1.2 1.2 0 0 0 0 1.697l5.43 5.43-5.43 5.43a1.2 1.2 0 0 0 0 1.698l2.546 2.545a1.2 1.2 0 0 0 1.697 0l9.672-9.672z" clip-rule="evenodd"></path></svg>
-        </div>
-    </div>
-    <div id="extra-content"></div>
-    <div id="players-section">
-        <p id="player-count"></p>
-    </div>
+            <div class="hero-content">
+                <div class="hero-brandline">
+                    <span class="hero-wordmark">Nextieria</span>
+                    <span class="season-number">Season 6</span>
+                </div>
+                <h1 id="season-title">Darkness<br>Rises</h1>
+                <a class="hero-download" href="/Download">Download Nextieria</a>
+            </div>
+            <a class="scroll-cue" href="#features">
+                <span>Discover Nextieria</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16.5 3.5 8l1.4-1.4L12 13.7l7.1-7.1L20.5 8z"></path></svg>
+            </a>
+        </section>
+
+        <section class="features" id="features" aria-label="Nextieria features">
+            <div class="feature-grid">
+                <article class="feature-card feature-mobile">
+                    <div class="feature-media">
+                        <img src="https://nextieria.ddns.net:45/Downloads/Images/NextieriaMobile.png" alt="Nextieria on mobile devices">
+                    </div>
+                    <h3>Play Anywhere</h3>
+                    <p>Take Nextieria with you and play on Android or iOS.</p>
+                </article>
+                <article class="feature-card feature-servers">
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 48 48"><path d="M10 9h28a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H10a3 3 0 0 1-3-3v-8a3 3 0 0 1 3-3Zm0 16h28a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H10a3 3 0 0 1-3-3v-8a3 3 0 0 1 3-3Zm2-10v2h3v-2h-3Zm0 16v2h3v-2h-3Zm8-16v2h15v-2H20Zm0 16v2h15v-2H20Z"></path></svg>
+                    </div>
+                    <h3>24/7 Servers</h3>
+                    <p>Nextieria never sleeps. Jump in and play whenever you want, day or night.</p>
+                </article>
+                <article class="feature-card feature-season">
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 48 48"><path d="m24 4 19 10v20L24 44 5 34V14L24 4Zm0 5.2L10 16.6v14.8l14 7.4 14-7.4V16.6L24 9.2Zm0 4.1 10 5.3v10.8l-10 5.3-10-5.3V18.6l10-5.3Zm0 5.1-5 2.7v5.8l5 2.7 5-2.7v-5.8l-5-2.7Z"></path></svg>
+                    </div>
+                    <h3>Relive the Golden Days</h3>
+                    <p>Jump back into Chapter 1 Season 6 and experience that familiar feeling, with game modes like Solo Late Game and Solo, plus plans for Playground and LTMs in the future.</p>
+                </article>
+            </div>
+        </section>
+    </main>
 
     <div id="footer"></div>
-
-    <div class="go-top" id="go-top" role="link" tabindex="0" onclick="goToTop()" onkeydown="handleGoTopKey(event)">
-        <svg viewBox="0 0 32 32" aria-hidden="true"><path fill-rule="evenodd" d="M15.058 6.329a1.2 1.2 0 0 0-1.697 0l-2.546 2.545a1.2 1.2 0 0 0 0 1.697l5.43 5.43-5.43 5.43a1.2 1.2 0 0 0 0 1.698l2.546 2.545a1.2 1.2 0 0 0 1.697 0l9.672-9.672z" clip-rule="evenodd"></path></svg>
-        <span>Go to the top</span>
-    </div>
 </body>
 </html>
